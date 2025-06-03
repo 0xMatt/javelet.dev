@@ -1,10 +1,10 @@
-import {Calculator, Calendar, CreditCard, Search, Settings, Smile, User} from "lucide-react"
+import {CreditCard, Search, Settings, User} from "lucide-react"
 
 import {Label} from "@/components/ui/label"
 import {
     SidebarGroup,
     SidebarGroupContent,
-    SidebarInput, SidebarMenuSubButton, SidebarMenuSubItem,
+    SidebarInput,
 } from "@/components/ui/sidebar"
 
 import React, {useState} from "react";

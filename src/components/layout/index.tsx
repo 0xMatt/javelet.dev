@@ -13,11 +13,12 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import {Component, Home} from "lucide-react";
+import {ReactNode} from "react";
 
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
 
 
