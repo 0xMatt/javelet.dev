@@ -21,7 +21,7 @@ const STATS = [
 const Stats = () => {
     return (
         <section>
-            <SectionTitle title="Stats on Stacks" link={{text: 'More', href: 'stats'}}/>
+            <SectionTitle title="Stats on Stacks" link={{text: 'More Stats', href: 'stats'}}/>
             <div className="grid auto-rows-min gap-4 lg:grid-cols-2 grid-cols-1">
                 {STATS.map((stat) => (
                     <Card className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101" key={stat.title}>
