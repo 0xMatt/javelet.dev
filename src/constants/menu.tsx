@@ -4,38 +4,38 @@ import {MenuItem} from "@/types/menu";
 export const MENU_ITEMS: Array<MenuItem> = [
     {
         title: "Home",
-        url: "#",
+        url: "/",
         icon: HomeIcon,
         isActive: true,
     },
     {
         title: "Stats",
-        url: "#",
+        url: "/stats",
         icon: ChartAreaIcon,
         isActive: true,
     },
     {
         title: "About",
-        url: "#",
+        url: "/about",
         icon: User,
         isActive: true,
     },
 
     {
         title: "Blog",
-        url: "#",
+        url: "/blog",
         icon: Rss,
         isActive: true,
     },
     {
         title: "Projects",
-        url: "#",
+        url: "/projects",
         icon: CoffeeIcon,
         isActive: true,
     },
     {
         title: "Contact",
-        url: "#",
+        url: "/contact",
         icon: AtSignIcon,
         isActive: true,
     },

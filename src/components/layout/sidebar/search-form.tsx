@@ -67,10 +67,12 @@ export function SearchForm({...props}: React.ComponentProps<"form">) {
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Pages">
                         {MENU_ITEMS.map((item) => (
-                            <CommandItem key={item.title}>
+                            <a href={item.url} key={item.title}>
+                            <CommandItem key={item.title} className={"cursor-pointer"}>
                                 <item.icon/>
                                 <span>{item.title}</span>
                             </CommandItem>
+                            </a>
                         ))}
                     </CommandGroup>
                     <CommandSeparator/>

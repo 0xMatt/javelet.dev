@@ -1,19 +1,13 @@
 import {AppSidebar} from "@/components/layout/sidebar"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+
 import {Separator} from "@/components/ui/separator"
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import {Component, Home} from "lucide-react";
 import {ReactNode} from "react";
+import Breadcrumbs from "@/components/layout/breadcrumbs";
 
 export default function RootLayout({
                                        children,
@@ -36,21 +30,7 @@ export default function RootLayout({
                                             orientation="vertical"
                                             className="mr-2 data-[orientation=vertical]:h-4 md:hidden"
                                         />
-                                        <Breadcrumb>
-                                            <BreadcrumbList>
-                                                <BreadcrumbItem>
-                                                    <BreadcrumbLink href="#">
-                                                        <Home className="mr-1 h-4 w-4 inline" />
-                                                    </BreadcrumbLink>
-                                                </BreadcrumbItem>
-                                                <BreadcrumbSeparator className="hidden md:block"/>
-                                                <BreadcrumbItem>
-                                                    <BreadcrumbLink href="#">
-                                                        <Component className="mr-1 h-4 w-4 inline" /> Page
-                                                    </BreadcrumbLink>
-                                                </BreadcrumbItem>
-                                            </BreadcrumbList>
-                                        </Breadcrumb>
+                                        <Breadcrumbs/>
                                     </div>
                                 </header>
                                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
