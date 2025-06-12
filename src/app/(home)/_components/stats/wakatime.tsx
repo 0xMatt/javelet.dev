@@ -3,10 +3,10 @@
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Clock, Hash} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
-import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
 import useSWR from "swr";
 import StatSkeleton from "@/app/(home)/_components/stats/skeleton";
 import {fetcher} from "@/lib/fetcher";
+import DotPattern from "@/components/ui/dot-pattern";
 
 export default function WakaTime() {
 
@@ -18,8 +18,14 @@ export default function WakaTime() {
     return (
         <Card
             className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101 h-[130px]">
-            <PlaceholderPattern
-                className="absolute inset-0 size-full stroke-neutral-300/20 dark:stroke-neutral-100/20"/>
+            <DotPattern
+                width={20}
+                height={20}
+                cx={1}
+                cy={1}
+                cr={1}
+
+            />
             <CardHeader>
                 <CardDescription className={"flex flex-1"}>
                     <Clock size={13} className={"my-1 mr-2"}/>

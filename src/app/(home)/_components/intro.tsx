@@ -1,13 +1,8 @@
 import {Badge} from "@/components/ui/badge";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-} from "@/components/ui/card"
+import {Card, CardContent, CardDescription, CardFooter, CardHeader,} from "@/components/ui/card"
 import {Code, TrendingUp} from "lucide-react";
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
+import {BackgroundPattern} from "@/components/elements/background-pattern";
 
 const Intro = () => {
 
@@ -31,7 +26,8 @@ const Intro = () => {
     }
     return (
         <>
-            <Card className="@container/card gap-0 hover:scale-101">
+            <Card className="@container/card gap-0 hover:scale-101 relative dark:border-neutral-500">
+                <BackgroundPattern/>
                 <CardHeader>
                     <CardDescription>{data.description}</CardDescription>
                 </CardHeader>
@@ -55,8 +51,10 @@ const Intro = () => {
                     </div>
                 </CardFooter>
             </Card>
-            <div className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border hover:scale-101">
-                <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20" />
+            <div
+                className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border hover:scale-101">
+                <PlaceholderPattern
+                    className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20"/>
             </div>
         </>
 

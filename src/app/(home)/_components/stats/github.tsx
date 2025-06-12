@@ -1,13 +1,13 @@
 "use client"
 
-
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {GithubIcon, Hash} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
-import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
 import useSWR from 'swr';
 import StatSkeleton from "@/app/(home)/_components/stats/skeleton";
 import {fetcher} from "@/lib/fetcher";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import {cn} from "@/lib/utils";
 
 
 export default function Github() {
@@ -18,8 +18,15 @@ export default function Github() {
     return (
         <Card
             className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101 h-[130px]">
-            <PlaceholderPattern
-                className="absolute inset-0 size-full stroke-neutral-300/20 dark:stroke-neutral-100/20"/>
+            <AnimatedGridPattern
+                numSquares={30}
+                maxOpacity={0.1}
+                duration={3}
+                className={cn(
+                    "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+                    "inset-x-0 h-full"
+                )}
+            />
             <CardHeader>
                 <CardDescription className={"flex flex-1"}>
                     <GithubIcon size={13} className={"my-1 mr-2"}/>

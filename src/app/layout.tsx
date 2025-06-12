@@ -17,9 +17,10 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex-1 bg-white dark:bg-black">
                 <div className="border-b border-solid border-white">
-                    <div
-                        className="border-l-1 border-r-1 mx-50 border-white dark:border-zinc-800 bg-neutral-200 dark:bg-zinc-900">
-                        <div className="mx-auto border-x border-border/60 relative max-w-[1360px]">
+                    <div className="mx-auto w-full border-x border-border/60 relative max-w-[1360px]">
+                        <div
+                            className="border-l-1 border-r-1 px-10 border-white dark:border-zinc-800 bg-neutral-100 dark:bg-zinc-900">
+
                             <SidebarProvider>
                                 <AppSidebar/>
                                 <SidebarInset>
@@ -52,6 +53,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
         <Analytics/>
         </body>
         </html>
-    );
+    )
+        ;
 };
 
