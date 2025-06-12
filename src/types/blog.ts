@@ -1,7 +1,7 @@
 export type BlogItem = {
     title: string;
     slug: string;
-    description: string;
+    summary: string;
     author: {
         name: string;
         email: string;
