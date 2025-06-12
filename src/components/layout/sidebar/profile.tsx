@@ -1,9 +1,6 @@
-import {
-    BadgeCheck,
-    ChevronsUpDown,
-    Command,
-    LogOut
-} from "lucide-react"
+"use client"
+
+import {BadgeCheck, ChevronsUpDown, Command, LogOut} from "lucide-react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,12 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    useSidebar,
-} from "@/components/ui/sidebar"
+import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,} from "@/components/ui/sidebar"
 import * as React from "react";
 
 export function Profile({

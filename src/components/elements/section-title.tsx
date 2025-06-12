@@ -1,4 +1,5 @@
 import {ChevronRight} from "lucide-react";
+import Link from "next/link";
 
 type SectionTitleProps = {
     title: string;
@@ -15,15 +16,15 @@ const SectionTitle = ({title, link}: SectionTitleProps) => {
                 <h2 className="capitalize">{title}</h2>
             </div>
             {typeof link !== 'undefined' &&
-            <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
-                <a href={link.href}>
-                    <div
-                        className="mt-1 flex cursor-pointer gap-1 text-sm  transition-all duration-300 hover:gap-3">
-                        <div className="flex">{link.text}</div>
-                        <ChevronRight className="ml-1 mt-1" size={12}/>
-                    </div>
-                </a>
-            </div>
+                <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+                    <Link href={link.href}>
+                        <div
+                            className="mt-1 flex cursor-pointer gap-1 text-sm  transition-all duration-300 hover:gap-3">
+                            <div className="flex">{link.text}</div>
+                            <ChevronRight className="ml-1 mt-1" size={12}/>
+                        </div>
+                    </Link>
+                </div>
             }
         </div>
     );

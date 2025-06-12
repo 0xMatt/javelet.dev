@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {Command} from "lucide-react"
 
@@ -9,13 +7,14 @@ import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
-    SidebarHeader, SidebarInset,
+    SidebarHeader,
+    SidebarInset,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import {SearchForm} from "@/components/layout/sidebar/search-form";
-import {MENU_ITEMS} from "@/constants/menu";
+import Link from "next/link";
 
 const data = {
     user: {
@@ -32,7 +31,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <SidebarMenuButton size="lg" asChild>
-                                <a href="#">
+                                <Link href="/">
                                     <div
                                         className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                                         <Command className="size-4"/>
@@ -41,14 +40,14 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                                         <span className="truncate font-medium">Matthew Javelet</span>
                                         <span className="truncate text-xs">@0xMatt</span>
                                     </div>
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                     <SearchForm/>
                 </SidebarHeader>
                 <SidebarContent>
-                    <Navigation items={MENU_ITEMS}/>
+                    <Navigation/>
                 </SidebarContent>
                 <SidebarFooter>
                     <Profile user={data.user}/>

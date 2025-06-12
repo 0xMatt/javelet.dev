@@ -1,5 +1,6 @@
 import {Calendar, Clock, Video} from "lucide-react";
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
+import Link from "next/link";
 
 
 export default function Meet() {
@@ -11,7 +12,7 @@ export default function Meet() {
     return (
         <div className='space-y-5 pb-2'>
             <h3 className='text-lg font-medium'>Book a Call</h3>
-            <a
+            <Link
                 href={data.appointmentUrl}
                 target='_blank'
                 className='relative flex cursor-pointer flex-col space-y-5 rounded-l border px-6 py-5 transition-all duration-300 hover:scale-[101%] hover:shadow-sm'
@@ -43,7 +44,7 @@ export default function Meet() {
                         <span>Google Meet</span>
                     </div>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };

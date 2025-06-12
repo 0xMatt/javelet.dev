@@ -7,6 +7,7 @@ import SectionTitle from "@/components/elements/section-title";
 import useSWR from 'swr';
 import {BlogItem} from "@/types/blog";
 import {DateTime} from "luxon";
+import Link from "next/link";
 
 // @ts-expect-error any type is allowed
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -22,7 +23,7 @@ export default function Articles() {
             post.created_at = DateTime.now().minus({days: days.as('days')}).toRelative() || ''
         }
     })
-    
+
     return (
         <section>
             <SectionTitle title="Latest Articles" link={{text: 'View All', href: 'blog'}}/>
@@ -35,7 +36,7 @@ export default function Articles() {
                                 className={"text-sm"}>{article.created_at}</span>
                             </CardDescription>
                             <CardTitle className="text-lg">
-                                <a href="#" className={" hover:underline"}>{article.title}</a>
+                                <Link href="/blog" className={" hover:underline"}>{article.title}</Link>
                             </CardTitle>
                             <div className="line-clamp-1 flex gap-2 font-medium">
                                 {article.tags.map((tag) => (

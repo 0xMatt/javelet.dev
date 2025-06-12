@@ -1,14 +1,9 @@
 "use client"
 
-
 import {CreditCard, Search, Settings, User} from "lucide-react"
 
 import {Label} from "@/components/ui/label"
-import {
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarInput,
-} from "@/components/ui/sidebar"
+import {SidebarGroup, SidebarGroupContent, SidebarInput,} from "@/components/ui/sidebar"
 
 import React, {useState} from "react";
 
@@ -23,6 +18,7 @@ import {
     CommandShortcut,
 } from "@/components/ui/command"
 import {MENU_ITEMS} from "@/constants/menu";
+import Link from "next/link";
 
 export function SearchForm({...props}: React.ComponentProps<"form">) {
 
@@ -35,7 +31,7 @@ export function SearchForm({...props}: React.ComponentProps<"form">) {
             }
         }
         const click = (e: MouseEvent) => {
-            if(e.type === 'click' && document.getElementById('search')?.contains(e.target as Node)) {
+            if (e.type === 'click' && document.getElementById('search')?.contains(e.target as Node)) {
                 e.preventDefault()
                 setOpen((open) => !open)
             }
@@ -70,12 +66,12 @@ export function SearchForm({...props}: React.ComponentProps<"form">) {
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Pages">
                         {MENU_ITEMS.map((item) => (
-                            <a href={item.url} key={item.title}>
-                            <CommandItem key={item.title} className={"cursor-pointer"}>
-                                <item.icon/>
-                                <span>{item.title}</span>
-                            </CommandItem>
-                            </a>
+                            <Link href={item.url} key={item.title}>
+                                <CommandItem key={item.title} className={"cursor-pointer"}>
+                                    <item.icon/>
+                                    <span>{item.title}</span>
+                                </CommandItem>
+                            </Link>
                         ))}
                     </CommandGroup>
                     <CommandSeparator/>
