@@ -2,13 +2,8 @@
 
 import {usePathname} from 'next/navigation'
 
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import {ChevronsRight, Home} from "lucide-react";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage,} from "@/components/ui/breadcrumb"
+import {ChevronsRight, FileText, Home} from "lucide-react";
 import {MENU_ITEMS} from "@/constants/menu";
 
 const NextBreadcrumb = () => {
@@ -23,8 +18,8 @@ const NextBreadcrumb = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href={'/'}>
-                            <Home size={20} className="inline"/> Home
+                        <BreadcrumbLink href={'/'} className="inline-flex gap-2">
+                            <Home size={18} className="inline"/>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     {pathNames.length > 0}
@@ -33,27 +28,30 @@ const NextBreadcrumb = () => {
                             currentPage++;
                             const href = `/${pathNames.slice(0, index + 1).join('/')}`
                             const itemLink = link[0].toUpperCase() + link.slice(1, link.length)
-                            const page = MENU_ITEMS.filter(n => {
+                            let page = MENU_ITEMS.find(n => {
                                 return n.title === itemLink;
-                            }).shift();
+                            });
+
                             if (typeof page === 'undefined') {
-                                return;
+                                page = {
+                                    title: itemLink,
+                                    url: href,
+                                    icon: FileText
+                                }
                             }
                             return (
                                 <>
-                                    <BreadcrumbSeparator>
-                                        <ChevronsRight/>
-                                    </BreadcrumbSeparator>
+                                    <ChevronsRight size={14}/>
                                     <BreadcrumbItem key={index}>
                                         {currentPage !== totalPages ?
-                                            <BreadcrumbLink href={href}>
-                                                <page.icon size={20} className="inline"/>
-                                                <span className={"mt-2"}>{itemLink}</span>
+                                            <BreadcrumbLink href={href} className="inline-flex gap-2">
+                                                <page.icon size={18} className="inline"/>
+                                                <span>{itemLink}</span>
                                             </BreadcrumbLink>
                                             :
-                                            <BreadcrumbPage>
-                                                <page.icon size={20} className="inline"/>
-                                                <span className={"mt-3"}>{itemLink}</span>
+                                            <BreadcrumbPage className="inline-flex gap-2">
+                                                <page.icon size={18} className="inline"/>
+                                                <span>{itemLink}</span>
                                             </BreadcrumbPage>
                                         }
                                     </BreadcrumbItem>
