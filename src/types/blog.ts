@@ -9,7 +9,8 @@ export type BlogItem = {
     tags: Array<string>;
     stories: Array<BlogStory>;
     views: number;
-    created_at: Date;
+    created_at: string;
+    wpm: number;
 }
 
 export type BlogStory = {

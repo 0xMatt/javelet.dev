@@ -1,13 +1,13 @@
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {Cloud} from "lucide-react";
+import {Cloud, Hash} from "lucide-react";
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
-import {LoadingOverlay} from "@/components/elements/loading-overlay";
+import {Badge} from "@/components/ui/badge";
 
 export default async function Weather() {
 
     const data = await fetch('http://localhost:3000/api/services/open-weather');
     const weather = await data.json();
-
+    
     return (
         <Card className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101">
             <PlaceholderPattern
@@ -20,8 +20,15 @@ export default async function Weather() {
                 <CardTitle className="text-lg">
                     {weather.main.temp + '\u2109'}
                 </CardTitle>
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                    {weather.weather.map((tag: { description: string, icon: string }) => (
+                        <Badge variant="outline" key={tag.description}>
+                            <Hash/>
+                            {tag.description}
+                        </Badge>
+                    ))}
+                </div>
             </CardHeader>
-            <LoadingOverlay data={data}/>
         </Card>
     );
 };

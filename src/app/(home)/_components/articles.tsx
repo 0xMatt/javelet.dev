@@ -6,6 +6,7 @@ import {Badge} from "@/components/ui/badge";
 import SectionTitle from "@/components/elements/section-title";
 import useSWR from 'swr';
 import {BlogItem} from "@/types/blog";
+import {DateTime} from "luxon";
 
 // @ts-expect-error any type is allowed
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -13,10 +14,15 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Articles() {
 
     const {data} = useSWR(`/api/blog?page=1&per_page=4`, fetcher);
-
-
     if (!data) return <div>Loading...</div>
 
+    data.forEach((post: BlogItem) => {
+        const days = DateTime.now().diff(DateTime.fromISO(post.created_at), 'days');
+        if (days.as('days')) {
+            post.created_at = DateTime.now().minus({days: days.as('days')}).toRelative() || ''
+        }
+    })
+    
     return (
         <section>
             <SectionTitle title="Latest Articles" link={{text: 'View All', href: 'blog'}}/>

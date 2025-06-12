@@ -1,17 +1,12 @@
-"use client"
-
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Clock, Hash} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
-import useSWR from "swr";
-import {fetcher} from "@/lib/fetcher";
 import {Skeleton} from "@/components/ui/skeleton";
 
+export default async function WakaTime() {
 
-const WakaTime = () => {
-
-    const {data} = useSWR('/api/services/wakatime', fetcher);
+    const data = await fetch('http://localhost:3000/api/services/wakatime');
     if (!data) return (
         <Card
             className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101 animate-pulse">
@@ -20,6 +15,9 @@ const WakaTime = () => {
             <Skeleton className="h-[100px] w-75 rounded-xl mx-auto"/>
         </Card>
     )
+
+    const wakatime = await data.json();
+
 
     const tags: string[] = ['programming', 'daily average'];
 
@@ -34,7 +32,7 @@ const WakaTime = () => {
                         className={"text-sm"}>WakaTime</span>
                 </CardDescription>
                 <CardTitle className="text-lg">
-                    {data.data.human_readable_daily_average}
+                    {wakatime.data.human_readable_daily_average}
                 </CardTitle>
                 <div className="line-clamp-1 flex gap-2 font-medium">
                     {tags.map((tag) => (
@@ -49,5 +47,3 @@ const WakaTime = () => {
         </Card>
     );
 };
-
-export default WakaTime;
