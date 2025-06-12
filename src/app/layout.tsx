@@ -19,7 +19,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
                 <div className="border-b border-solid border-white">
                     <div className="mx-auto w-full border-x border-border/60 relative max-w-[1360px]">
                         <div
-                            className="border-l-1 border-r-1 px-10 border-white dark:border-zinc-800 bg-neutral-100 dark:bg-zinc-900">
+                            className="border-l-1 border-r-1 lg:px-10 border-white dark:border-zinc-800 bg-neutral-100 dark:bg-zinc-900">
 
                             <SidebarProvider>
                                 <AppSidebar/>
