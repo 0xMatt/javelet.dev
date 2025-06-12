@@ -4,9 +4,10 @@ import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-
-import './../styles/global.css'
 import {ThemeProvider} from "next-themes";
+import './../styles/global.css'
+import {SpeedInsights} from "@vercel/speed-insights/next";
+import {Analytics} from "@vercel/analytics/next";
 
 export default function RootLayout({children,}: { children: React.ReactNode }) {
     return (
@@ -42,6 +43,8 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
                 </div>
             </div>
         </ThemeProvider>
+        <SpeedInsights/>
+        <Analytics/>
         </body>
         </html>
     );
