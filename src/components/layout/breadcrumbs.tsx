@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {usePathname} from 'next/navigation'
 
@@ -6,14 +6,17 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    BreadcrumbList,
+    BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import {Component, Home} from "lucide-react";
+import {ChevronsRight, Home} from "lucide-react";
+import {MENU_ITEMS} from "@/constants/menu";
 
 const NextBreadcrumb = () => {
 
-    const paths = usePathname()
+    const paths = usePathname() || '';
     const pathNames = paths.split('/').filter(path => path)
+    const totalPages = pathNames.length;
+    let currentPage = 0;
 
     return (
         <>
@@ -21,20 +24,40 @@ const NextBreadcrumb = () => {
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbLink href={'/'}>
-                            <Home className="mr-1 h-4 w-4 inline"/> Home
+                            <Home size={20} className="inline"/> Home
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     {pathNames.length > 0}
                     {
                         pathNames.map((link, index) => {
+                            currentPage++;
                             const href = `/${pathNames.slice(0, index + 1).join('/')}`
                             const itemLink = link[0].toUpperCase() + link.slice(1, link.length)
+                            const page = MENU_ITEMS.filter(n => {
+                                return n.title === itemLink;
+                            }).shift();
+                            if (typeof page === 'undefined') {
+                                return;
+                            }
                             return (
-                                <BreadcrumbItem key={index}>
-                                    <BreadcrumbLink href={href}>
-                                        <Component className="mr-1 h-4 w-4 inline"/> {itemLink}
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
+                                <>
+                                    <BreadcrumbSeparator>
+                                        <ChevronsRight/>
+                                    </BreadcrumbSeparator>
+                                    <BreadcrumbItem key={index}>
+                                        {currentPage !== totalPages ?
+                                            <BreadcrumbLink href={href}>
+                                                <page.icon size={20} className="inline"/>
+                                                <span className={"mt-2"}>{itemLink}</span>
+                                            </BreadcrumbLink>
+                                            :
+                                            <BreadcrumbPage>
+                                                <page.icon size={20} className="inline"/>
+                                                <span className={"mt-3"}>{itemLink}</span>
+                                            </BreadcrumbPage>
+                                        }
+                                    </BreadcrumbItem>
+                                </>
                             )
                         })
                     }

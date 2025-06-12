@@ -1,3 +1,5 @@
+"use client"
+
 import {ChevronRight, ChevronsUpDown, Moon, Sun} from "lucide-react"
 
 import {

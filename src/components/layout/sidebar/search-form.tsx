@@ -1,3 +1,6 @@
+"use client"
+
+
 import {CreditCard, Search, Settings, User} from "lucide-react"
 
 import {Label} from "@/components/ui/label"
