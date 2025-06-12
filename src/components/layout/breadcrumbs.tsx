@@ -18,7 +18,7 @@ const NextBreadcrumb = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href={'/'} className="inline-flex gap-2">
+                        <BreadcrumbLink href={'/'} className="inline-flex gap-2" aria-label="Navigate to homepage">
                             <Home size={18} className="inline"/>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
