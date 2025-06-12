@@ -1,7 +1,9 @@
+import Github from "@/app/(home)/_components/stats/github";
 import SectionTitle from "@/components/elements/section-title";
-import Wakatime from "./stats/wakatime";
-import Weather from "./stats/weather";
-import Github from "./stats/github";
+import Weather from "@/app/(home)/_components/stats/weather";
+import WakaTime from "@/app/(home)/_components/stats/wakatime";
+
+export const dynamic = 'force-dynamic';
 
 export default function Stats() {
 
@@ -9,7 +11,7 @@ export default function Stats() {
         <section>
             <SectionTitle title="Stats on Stacks" link={{text: 'More Stats', href: 'stats'}}/>
             <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
-                <Wakatime/>
+                <WakaTime/>
                 <Github/>
                 <Weather/>
             </div>

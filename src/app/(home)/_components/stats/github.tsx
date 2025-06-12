@@ -1,12 +1,19 @@
+"use client"
+
+
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {GithubIcon, Hash} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
 import {Skeleton} from "@/components/ui/skeleton";
+import useSWR from 'swr';
 
-export default async function Github() {
+// @ts-expect-error any type is allowed
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-    const data = await fetch('http://localhost:3000/api/services/github');
+export default function Github() {
+
+    const {data} = useSWR(`/api/services/github`, fetcher);
 
     if (!data) return (
         <Card
@@ -16,8 +23,6 @@ export default async function Github() {
             <Skeleton className="h-[100px] w-75 rounded-xl mx-auto"/>
         </Card>
     )
-
-    const github = await data.json();
 
     return (
         <Card className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101">
@@ -30,7 +35,7 @@ export default async function Github() {
                         className={"text-sm"}>GitHub</span>
                 </CardDescription>
                 <CardTitle className="text-lg">
-                    {github.data.user.contributionsCollection.contributionCalendar.totalContributions} contributions
+                    {data.data.user.contributionsCollection.contributionCalendar.totalContributions} contributions
                 </CardTitle>
                 <div className="line-clamp-1 flex gap-2 font-medium">
                     {['open source', new Date().getFullYear()].map((tag) => (
@@ -44,5 +49,5 @@ export default async function Github() {
 
         </Card>
     );
-};
+}
 
