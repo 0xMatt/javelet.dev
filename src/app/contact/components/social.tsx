@@ -6,12 +6,11 @@ import {cn} from "@/lib/utils";
 export default function Social() {
     return (
         <div className='pb-2'>
-            <h3 className='text-lg font-medium py-3'>Fastest methods to reach me</h3>
-            <div className='flex flex-col justify-between gap-2 md:flex-row'>
+            <div className='flex flex-wrap justify-items-start gap-2 md:flex-row'>
                 {SOCIAL_ITEMS.map((item) => (
                     <Button key={item.name} size="sm"
                             className={cn(
-                                "flex flex-1 items-center justify-center transition-all duration-300 hover:scale-105 w-full dark:text-white",
+                                "transition-all duration-300 hover:scale-105 w-full dark:text-white",
                                 item.color.light,
                                 "dark:" + item.color.dark,
                                 "hover:" + item.color.light,

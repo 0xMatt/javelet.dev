@@ -26,7 +26,8 @@ const Intro = () => {
     }
     return (
         <>
-            <Card className="@container/card gap-0 hover:scale-101 relative dark:border-neutral-500">
+            <Card
+                className="@container/card gap-0 hover:scale-101 relative dark:border-neutral-500 transition-all duration-300">
                 <BackgroundPattern/>
                 <CardHeader>
                     <CardDescription>{data.description}</CardDescription>
@@ -52,7 +53,7 @@ const Intro = () => {
                 </CardFooter>
             </Card>
             <div
-                className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border hover:scale-101">
+                className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border hover:scale-101 transition-all duration-300">
                 <PlaceholderPattern
                     className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20"/>
             </div>

@@ -13,7 +13,7 @@ const PageHeader = ({header, description}: PageHeaderProps) => {
                 {description}
             </p>
             <div
-                className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border hover:scale-101">
+                className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border  hover:scale-102 transition-all duration-300">
                 <PlaceholderPattern
                     className="absolute inset-0 size-full stroke-neutral-400/20 dark:stroke-neutral-100/20"/>
             </div>

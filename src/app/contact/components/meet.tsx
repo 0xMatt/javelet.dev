@@ -11,7 +11,6 @@ export default function Meet() {
 
     return (
         <div className='space-y-5 pb-2'>
-            <h3 className='text-lg font-medium'>Book a Call</h3>
             <Link
                 href={data.appointmentUrl}
                 target='_blank'
@@ -24,10 +23,10 @@ export default function Meet() {
 
                     <div className='space-y-1'>
                         <div className='flex items-center gap-2 text-base font-medium md:text-lg'>
-                            <span>Formal Date</span>
+                            <span>Schedule Meeting</span>
                         </div>
                         <p className='text-sm dark:text-neutral-300 md:text-base'>
-                            (seal it with a kiss?)
+                            Free consultant
                         </p>
                     </div>
                     <div className='rounded-full border-2 border-neutral-400 p-3'>

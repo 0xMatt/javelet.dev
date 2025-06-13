@@ -42,14 +42,14 @@ const NextBreadcrumb = () => {
                             return (
                                 <>
                                     <ChevronsRight size={14}/>
-                                    <BreadcrumbItem key={index}>
+                                    <BreadcrumbItem>
                                         {currentPage !== totalPages ?
-                                            <BreadcrumbLink href={href} className="inline-flex gap-2">
+                                            <BreadcrumbLink href={href} className="inline-flex gap-2" key={index}>
                                                 <page.icon size={18} className="inline"/>
                                                 <span>{itemLink}</span>
                                             </BreadcrumbLink>
                                             :
-                                            <BreadcrumbPage className="inline-flex gap-2">
+                                            <BreadcrumbPage className="inline-flex gap-2" key={index}>
                                                 <page.icon size={18} className="inline"/>
                                                 <span>{itemLink}</span>
                                             </BreadcrumbPage>

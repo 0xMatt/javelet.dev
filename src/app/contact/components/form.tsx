@@ -6,15 +6,15 @@ import {z} from "zod"
 import {Button} from "@/components/ui/button"
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
-import {Clock} from "lucide-react";
 import {Textarea} from "@/components/ui/textarea";
+import {Send} from "lucide-react";
 
 const FormSchema = z.object({
     name: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
     email: z.string().includes('@', {
-        message: "Email must be at least 2 characters.",
+        message: "Must use a valid email address.",
     }),
     message: z.string().min(2, {
         message: "Message must be at least 10 characters.",
@@ -43,10 +43,8 @@ export default function ContactForm() {
 
     return (
         <>
-            <h3 className='text-lg font-medium'>Spam my inbox</h3>
-
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 mx-auto">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 w-full">
                     <div className='flex flex-grow flex-col gap-5'>
                         <div className='flex flex-col gap-5 md:flex-row'>
                             <FormField
@@ -83,7 +81,8 @@ export default function ContactForm() {
                                 <FormItem className={"w-full"}>
                                     <FormLabel>Message</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Type your message here." {...field}/>
+                                        <Textarea rows={20} className="h-35"
+                                                  placeholder="Type your message here." {...field}/>
                                     </FormControl>
                                     <FormDescription>
                                     </FormDescription>
@@ -92,14 +91,7 @@ export default function ContactForm() {
                             )}
                         />
                     </div>
-                    <div className='my-5 flex items-center gap-2 dark:text-neutral-400'>
-                        <Clock size={12}/>
-                        <div className='text-sm'>
-                            <span className='font-medium'>Avg. response:</span> 1-2 Hours (Working
-                            Hours, GMT-5)
-                        </div>
-                    </div>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" className="w-full"><Send/> Send Message</Button>
                 </form>
             </Form>
 

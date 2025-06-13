@@ -2,8 +2,9 @@ import {headers} from "next/headers";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {ArrowUpRight, Calendar, Eye, ThumbsUp} from "lucide-react";
-import {BackgroundPattern} from "@/components/elements/background-pattern";
 import {DateTime} from "luxon";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import {cn} from "@/lib/utils";
 
 
 export default async function Page({
@@ -19,9 +20,19 @@ export default async function Page({
     const post = await res.json();
     post.created_at = DateTime.fromISO(post.created_at).toLocaleString(DateTime.DATETIME_FULL);
     return (
-        <div className="min-h-screen flex items-center justify-center px-6">
-            <BackgroundPattern/>
-            <div className="relative z-10 text-center max-w-2xl">
+        <div className="w-full">
+
+            <div className="p-10 relative z-10 text-center">
+                <AnimatedGridPattern
+                    numSquares={50}
+                    maxOpacity={0.1}
+                    duration={3}
+                    className={cn(
+                        "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
+                        "inset-x-0 h-full"
+                    )}
+                />
+
                 <div
                     className="line-clamp-1 flex gap-2 font-medium justify-center">
                     <Badge
@@ -49,5 +60,7 @@ export default async function Page({
                 </div>
             </div>
         </div>
+
+
     )
 }

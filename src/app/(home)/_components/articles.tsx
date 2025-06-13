@@ -31,7 +31,7 @@ export default function Articles() {
             <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
                 {data.map((article: BlogItem) => (
                     <Card key={article.slug}
-                          className="p-0 gap-2 shadow-none overflow-hidden rounded-md dark:border-neutral-700 hover:scale-101">
+                          className="p-0 gap-2 shadow-none overflow-hidden rounded-md dark:border-neutral-700 hover:scale-102 transition-all duration-300">
                         <CardHeader className="p-0 relative">
                             <div className="aspect-video bg-muted w-full border-b"/>
                             <div

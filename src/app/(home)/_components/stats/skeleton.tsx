@@ -13,7 +13,7 @@ export default function StatSkeleton() {
                     <Skeleton className="h-[20px] w-25 rounded-xl "/>
                 </CardDescription>
                 <CardTitle className="text-lg">
-                    <Skeleton className="h-[30px] w-75 rounded-xl "/>
+                    <Skeleton className="h-[30px] w-60 rounded-xl "/>
                 </CardTitle>
                 <div className="line-clamp-1 flex gap-2 font-medium">
                     <Skeleton className="h-[20px] w-20 rounded-xl "/> <Skeleton className="h-[20px] w-20 rounded-xl "/>

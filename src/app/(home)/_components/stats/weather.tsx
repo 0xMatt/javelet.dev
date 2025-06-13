@@ -15,7 +15,7 @@ export default function Weather() {
 
     return (
         <Card
-            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101  h-[130px]">
+            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300 h-[130px]">
             <PlaceholderPattern
                 className="absolute inset-0 size-full stroke-neutral-300/20 dark:stroke-neutral-100/20"/>
             <CardHeader>
