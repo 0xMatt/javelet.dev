@@ -1,4 +1,5 @@
 export type BlogItem = {
+    id?: string;
     title: string;
     slug: string;
     summary: string;

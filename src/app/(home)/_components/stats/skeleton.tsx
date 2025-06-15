@@ -5,7 +5,7 @@ import {Skeleton} from "@/components/ui/skeleton";
 export default function StatSkeleton() {
     return (
         <Card
-            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101 animate-pulse h-[130px]">
+            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-101 transition-all duration-300 animate-pulse h-[130px]">
             <PlaceholderPattern
                 className="absolute inset-0 size-full stroke-neutral-300/20 dark:stroke-neutral-100/20"/>
             <CardHeader>

@@ -1,6 +1,18 @@
 import {initializeApp} from "firebase/app";
 import {Analytics, getAnalytics} from "firebase/analytics";
-import {addDoc, collection, DocumentData, Firestore, getDocs, getFirestore} from "@firebase/firestore";
+import {
+    addDoc,
+    collection,
+    doc,
+    DocumentData,
+    DocumentReference,
+    Firestore,
+    getDoc,
+    getDocs,
+    getFirestore,
+    setDoc,
+    updateDoc
+} from "@firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -29,8 +41,24 @@ if (firebaseConfig?.projectId) {
 
 export {analytics, firestore, db};
 
-export async function addFirestoreData(table: string, document: DocumentData) {
+export async function addFirestoreDoc(table: string, document: DocumentData) {
     return await addDoc(collection(db, table), document);
+}
+
+export async function setFirestoreDoc(table: string, key: string, document: DocumentData) {
+    return await setDoc(doc(db, table, key), document);
+}
+
+export async function updateFirestoreDoc(ref: DocumentReference, document: DocumentData) {
+    return await updateDoc(ref, document);
+}
+
+export function getFirestoreRef(table: string, id: string): DocumentReference {
+    return doc(db, table, id);
+}
+
+export async function getFirestoreDoc(ref: DocumentReference) {
+    return await getDoc(ref);
 }
 
 export async function getFirestoreData(table: string) {

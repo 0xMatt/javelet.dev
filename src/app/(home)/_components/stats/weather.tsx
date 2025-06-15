@@ -2,11 +2,11 @@
 
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Cloud, Hash} from "lucide-react";
-import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
 import {Badge} from "@/components/ui/badge";
 import useSWR from "swr";
 import StatSkeleton from "@/app/(home)/_components/stats/skeleton";
 import {fetcher} from "@/lib/fetcher";
+import {Meteors} from "@/components/magicui/meteors";
 
 export default function Weather() {
 
@@ -15,9 +15,8 @@ export default function Weather() {
 
     return (
         <Card
-            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300 h-[130px]">
-            <PlaceholderPattern
-                className="absolute inset-0 size-full stroke-neutral-300/20 dark:stroke-neutral-100/20"/>
+            className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300 h-[130px] overflow-hidden">
+            <Meteors number={100}/>
             <CardHeader>
                 <CardDescription className={"flex flex-1"}>
                     <Cloud size={13} className={"my-1 mr-2"}/>

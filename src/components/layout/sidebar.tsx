@@ -16,13 +16,6 @@ import {
 import {SearchForm} from "@/components/layout/sidebar/search-form";
 import Link from "next/link";
 
-const data = {
-    user: {
-        name: "Matthew Javelet",
-        email: "matthew@fyuze.io",
-    }
-}
-
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant="inset" {...props}>
@@ -50,7 +43,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     <Navigation/>
                 </SidebarContent>
                 <SidebarFooter>
-                    <Profile user={data.user}/>
+                    <Profile/>
                 </SidebarFooter>
             </SidebarInset>
         </Sidebar>
