@@ -5,6 +5,7 @@ import {ArrowUpRight, Calendar, Eye, ThumbsUp} from "lucide-react";
 import {DateTime} from "luxon";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import {cn} from "@/lib/utils";
+import {updateViews} from "@/services/internal/blog";
 
 
 export default async function Page({
@@ -18,6 +19,8 @@ export default async function Page({
     const host = headersList.get('x-forwarded-host');
     const res = await fetch(`${schema}://${host}/api/blog/${slug}`);
     const post = await res.json();
+
+    await updateViews(slug);
     post.created_at = DateTime.fromISO(post.created_at).toLocaleString(DateTime.DATETIME_FULL);
     return (
         <div className="w-full">

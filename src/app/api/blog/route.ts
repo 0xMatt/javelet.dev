@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const q = query(
         collection(db, 'blog.posts'),
         orderBy("created_at", "desc"),
-        limit(Number(searchParams.get('perPage')) || 1),
+        limit(Number(searchParams.get('perPage')) || 10),
         // startAt(1),
         // endAt(1000)
     );

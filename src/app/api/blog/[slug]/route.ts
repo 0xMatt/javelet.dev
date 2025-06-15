@@ -1,5 +1,4 @@
-import {collection, getDocs, query, where} from "@firebase/firestore";
-import {db} from "@/services/firestore";
+import {getFirestoreDoc, getFirestoreRef} from "@/services/firestore";
 
 export async function GET(
     request: Request,
@@ -7,19 +6,17 @@ export async function GET(
 ) {
     const {slug} = await params
 
-    let document = undefined;
+    const ref = getFirestoreRef('blog.posts', slug);
+    const doc = await getFirestoreDoc(ref);
 
-    const q = query(
-        collection(db, 'blog.posts'),
-        where('slug', '==', slug)
-    );
+    if (doc.exists()) {
+        return Response.json(doc.data())
+    } else {
+        // docSnap.data() will be undefined in this case
+        return Response.error();
+    }
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        document = doc.data();
-    });
-
-    return Response.json(document)
+    return Response.json(await getFirestoreDoc(ref))
 }
 
 export async function POST() {
