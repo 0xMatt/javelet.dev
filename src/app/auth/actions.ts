@@ -34,3 +34,16 @@ export async function register(formData: FormData) {
     revalidatePath('/', 'layout')
     redirect('/account')
 }
+
+export async function logout() {
+    const supabase = await createClient()
+    const {
+        data: {user},
+    } = await supabase.auth.getUser()
+    if (user) {
+        await supabase.auth.signOut()
+    }
+    revalidatePath('/', 'layout')
+    revalidatePath('/', 'page')
+    redirect('/')
+}

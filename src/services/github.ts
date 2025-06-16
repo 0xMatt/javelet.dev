@@ -15,6 +15,11 @@ export async function getContributions() {
                 contributionCalendar {
                   colors
                   totalContributions
+                  months {
+                      firstDay
+                      name
+                      totalWeeks
+                  }
                   weeks {
                     contributionDays {
                       color

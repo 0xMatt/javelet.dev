@@ -12,18 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,} from "@/components/ui/sidebar"
 import * as React from "react";
-import {useRouter} from 'next/navigation'
+import {Button} from "@/components/ui/button";
+import {logout} from "@/app/auth/actions";
 
 // @ts-expect-error yee
 export function UserProfile({user}) {
     const {isMobile} = useSidebar()
-
-    const router = useRouter();
-
-    const signOut = async () => {
-        await fetch(`/auth/signout`);
-        router.refresh();
-    };
 
     return (
         <SidebarMenu>
@@ -71,9 +65,13 @@ export function UserProfile({user}) {
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem onClick={signOut}>
-                            <LogOut/>
-                            Log out
+                        <DropdownMenuItem>
+                            <form>
+                                <Button formAction={logout} type="submit">
+                                    <LogOut/>
+                                    Log out
+                                </Button>
+                            </form>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

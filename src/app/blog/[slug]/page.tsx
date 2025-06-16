@@ -1,4 +1,3 @@
-import {headers} from "next/headers";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {ArrowUpRight, Calendar, Eye, ThumbsUp} from "lucide-react";
@@ -7,17 +6,16 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import {cn} from "@/lib/utils";
 import {updateViews} from "@/services/internal/blog";
 
-
 export default async function Page({
                                        params,
                                    }: {
     params: Promise<{ slug: string }>
 }) {
     const {slug} = await params;
-    const headersList = await headers();
-    const schema = headersList.get('x-forwarded-proto');
-    const host = headersList.get('x-forwarded-host');
-    const res = await fetch(`${schema}://${host}/api/blog/${slug}`);
+    //const headersList = await headers();
+    //const schema = headersList.get('x-forwarded-proto');
+    //const host = headersList.get('x-forwarded-host');
+    const res = await fetch(`/api/blog/${slug}`);
     const post = await res.json();
 
     await updateViews(slug);

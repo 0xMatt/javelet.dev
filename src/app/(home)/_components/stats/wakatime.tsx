@@ -44,7 +44,6 @@ export default function WakaTime() {
                     ))}
                 </div>
             </CardHeader>
-
         </Card>
     );
 };

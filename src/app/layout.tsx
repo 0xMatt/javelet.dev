@@ -20,21 +20,18 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en" suppressHydrationWarning>
         <body className="min-h-full relative">
-
+        <FlickeringGrid
+            className="absolute  z-0 size-full min-h-full"
+            squareSize={4}
+            gridGap={6}
+            color="#6B7280"
+            maxOpacity={0.5}
+            flickerChance={0.1}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex-1 bg-white dark:bg-black">
-
                 <div className="border-b border-solid border-white">
-
                     <div className="mx-auto w-full border-x border-border/60 relative max-w-[1360px]">
-                        <FlickeringGrid
-                            className="absolute  z-0 size-full min-h-full"
-                            squareSize={4}
-                            gridGap={6}
-                            color="#6B7280"
-                            maxOpacity={0.5}
-                            flickerChance={0.1}
-                        />
                         <div
                             className="border-l-1 border-r-1 lg:px-20 border-white dark:border-zinc-800 bg-neutral-100 dark:bg-zinc-900">
                             <HeaderProvider>{children}</HeaderProvider>
