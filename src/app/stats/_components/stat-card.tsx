@@ -6,7 +6,7 @@ import {NumberTicker} from "@/components/magicui/number-ticket";
 
 type StatCardProps = {
     label: string;
-    icon: LucideIcon
+    icon?: LucideIcon
     value?: string;
     number?: number;
     tags?: string[];
@@ -14,13 +14,12 @@ type StatCardProps = {
     className?: string;
 }
 
-export default function StatCard({label, number, value, tags, icon, unit, className}: StatCardProps) {
+export default function StatCard({label, number, value, tags, unit, className}: StatCardProps) {
     return (
         <Card
             className={cn('@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300', className)}>
             <CardHeader>
                 <CardDescription className={"flex flex-1"}>
-                    icon
                     <span className={"text-sm"}>{label}</span>
                 </CardDescription>
                 <CardTitle className="text-lg">
