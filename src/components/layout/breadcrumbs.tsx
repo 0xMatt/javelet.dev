@@ -17,7 +17,7 @@ const NextBreadcrumb = () => {
         <>
             <Breadcrumb>
                 <BreadcrumbList>
-                    <BreadcrumbItem>
+                    <BreadcrumbItem key={'home'}>
                         <BreadcrumbLink href={'/'} className="inline-flex gap-2" aria-label="Navigate to homepage">
                             <Home size={18} className="inline"/>
                         </BreadcrumbLink>
@@ -41,8 +41,8 @@ const NextBreadcrumb = () => {
                             }
                             return (
                                 <>
-                                    <ChevronsRight size={14}/>
-                                    <BreadcrumbItem>
+                                    <ChevronsRight size={14} key={`chevron-${index}`}/>
+                                    <BreadcrumbItem key={index}>
                                         {currentPage !== totalPages ?
                                             <BreadcrumbLink href={href} className="inline-flex gap-2" key={index}>
                                                 <page.icon size={18} className="inline"/>

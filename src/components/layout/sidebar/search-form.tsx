@@ -55,6 +55,7 @@ export function SearchForm({...props}: React.ComponentProps<"form">) {
                     <SidebarInput
                         id="search"
                         className="pl-12"
+                        tabIndex={-1}
                     />
                     <Search
                         className="pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2 opacity-50 select-none"/>
@@ -66,7 +67,9 @@ export function SearchForm({...props}: React.ComponentProps<"form">) {
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Pages">
                         {MENU_ITEMS.map((item) => (
-                            <Link href={item.url} key={item.title}>
+                            <Link href={item.url} key={item.title} onClick={() => {
+                                setOpen(false)
+                            }}>
                                 <CommandItem key={item.title} className={"cursor-pointer"}>
                                     <item.icon/>
                                     <span>{item.title}</span>
