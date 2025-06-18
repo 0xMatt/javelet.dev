@@ -7,6 +7,7 @@ import useSWR from "swr";
 import StatSkeleton from "@/app/(home)/_components/stats/skeleton";
 import {fetcher} from "@/lib/fetcher";
 import DotPattern from "@/components/ui/dot-pattern";
+import {ShineBorder} from "@/components/magicui/shine-border";
 
 export default function WakaTime() {
 
@@ -44,6 +45,7 @@ export default function WakaTime() {
                     ))}
                 </div>
             </CardHeader>
+            <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}/>
         </Card>
     );
 };

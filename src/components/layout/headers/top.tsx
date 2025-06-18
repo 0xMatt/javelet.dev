@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button";
-import {Command, SunIcon} from "lucide-react";
+import {Command} from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import * as React from "react";
 import {MENU_ITEMS} from "@/constants/menu";
+import {ThemeSelector} from "@/components/elements/theme-selector";
 
 export default function HeaderTop({children}: { children: React.ReactNode }) {
     return (
@@ -35,8 +36,9 @@ export default function HeaderTop({children}: { children: React.ReactNode }) {
                                     {MENU_ITEMS?.map((subItem) => (
                                         <NavigationMenuItem key={subItem.title}>
                                             <NavigationMenuLink asChild>
-                                                <Link href={subItem.url}>
-                                                    <span>{subItem.title}</span>
+                                                <Link href={subItem.url} className="inline-flex flex-row align-middle">
+                                                    <span className="align-middle mt-0.5 mr-1"><subItem.icon/></span>
+                                                    <span className="align-middle">  {subItem.title}</span>
                                                 </Link>
                                             </NavigationMenuLink>
                                         </NavigationMenuItem>
@@ -46,13 +48,13 @@ export default function HeaderTop({children}: { children: React.ReactNode }) {
                             {/*<NavMenu className="hidden md:block" />*/}
                         </div>
                         <div className="flex items-center gap-3">
-                            <Button variant="outline" className="hidden sm:inline-flex">
-                                Sign In
-                            </Button>
-                            <Button>Sign Up</Button>
-                            <Button size="icon" variant="outline">
-                                <SunIcon/>
-                            </Button>
+                            <Link href="/auth">
+                                <Button variant="outline" size={"sm"} className="hidden sm:inline-flex cursor-pointer">
+                                    Sign In
+                                </Button>
+                            </Link>
+                            <Link href="/auth"><Button className="cursor-pointer" size="sm">Sign Up</Button></Link>
+                            <ThemeSelector variant='toggle'/>
                             {/* Mobile Menu */}
                             <div className="md:hidden">
                                 {/*<NavigationSheet />*/}

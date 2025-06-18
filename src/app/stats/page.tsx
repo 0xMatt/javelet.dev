@@ -23,8 +23,8 @@ export default async function Page() {
 
     const wakatime = await data.wakatime.json();
     const github = await data.github.json();
-    console.log(wakatime);
-    console.log(github);
+
+    console.log('github', github);
 
     const contributionCalendar =
         github.data.user.contributionsCollection?.contributionCalendar;

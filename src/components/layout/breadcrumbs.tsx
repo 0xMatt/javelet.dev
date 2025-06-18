@@ -16,7 +16,7 @@ const NextBreadcrumb = () => {
     return (
         <>
             <Breadcrumb>
-                <BreadcrumbList>
+                <BreadcrumbList key={"bc-" + pathNames[currentPage]}>
                     <BreadcrumbItem key={'home'}>
                         <BreadcrumbLink href={'/'} className="inline-flex gap-2" aria-label="Navigate to homepage">
                             <Home size={18} className="inline"/>
@@ -42,19 +42,21 @@ const NextBreadcrumb = () => {
                             return (
                                 <>
                                     <ChevronsRight size={14} key={`chevron-${index}`}/>
-                                    <BreadcrumbItem key={index}>
+                                    <BreadcrumbItem key={"bci" + index}>
                                         {currentPage !== totalPages ?
-                                            <BreadcrumbLink href={href} className="inline-flex gap-2" key={index}>
-                                                <page.icon size={18} className="inline"/>
+                                            <BreadcrumbLink href={href} className="inline-flex gap-2 mt-0.5"
+                                                            key={index}>
+                                                <page.icon size={18} className="inline mt-1"/>
                                                 <span>{itemLink}</span>
                                             </BreadcrumbLink>
                                             :
-                                            <BreadcrumbPage className="inline-flex gap-2" key={index}>
+                                            <BreadcrumbPage className="inline-flex gap-2 mt-0.5" key={index}>
                                                 <page.icon size={18} className="inline"/>
                                                 <span>{itemLink}</span>
                                             </BreadcrumbPage>
                                         }
                                     </BreadcrumbItem>
+
                                 </>
                             )
                         })

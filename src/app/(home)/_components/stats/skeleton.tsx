@@ -1,6 +1,7 @@
 import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Skeleton} from "@/components/ui/skeleton";
+import {ShineBorder} from "@/components/magicui/shine-border";
 
 export default function StatSkeleton() {
     return (
@@ -19,6 +20,7 @@ export default function StatSkeleton() {
                     <Skeleton className="h-[20px] w-20 rounded-xl "/> <Skeleton className="h-[20px] w-20 rounded-xl "/>
                 </div>
             </CardHeader>
+            <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}/>
         </Card>
     );
 };

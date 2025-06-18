@@ -17,7 +17,6 @@ import {
 import * as React from "react";
 import {MENU_ITEMS} from "@/constants/menu";
 import Link from "next/link";
-import {ThemeSelector} from "@/components/elements/theme-selector";
 
 export function Navigation() {
 
@@ -61,9 +60,6 @@ export function Navigation() {
                         </SidebarMenuItem>
                     </Collapsible>
                 ))}
-                <SidebarMenuItem>
-                    <ThemeSelector variant='dropdown'/>
-                </SidebarMenuItem>
             </SidebarMenu>
         </SidebarGroup>
     )
