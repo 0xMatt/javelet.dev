@@ -1,15 +1,8 @@
-import {Button} from "@/components/ui/button";
-import {Command} from "lucide-react";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
 import * as React from "react";
-import {MENU_ITEMS} from "@/constants/menu";
 import {ThemeSelector} from "@/components/elements/theme-selector";
+import TopMenu from "@/components/layout/top/menu";
+import {NavigationSheet} from "@/components/layout/top/sheet";
+import {Profile} from "@/components/layout/top/profile";
 
 export default function HeaderTop({children}: { children: React.ReactNode }) {
     return (
@@ -19,46 +12,15 @@ export default function HeaderTop({children}: { children: React.ReactNode }) {
                     className="sticky  top-0 flex h-16 shrink-0 items-center gap-2 border-b border-b-white z-[100]">
                     <div
                         className="h-full flex items-center justify-between w-full mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="md:hidden">
+                            <NavigationSheet/>
+                        </div>
                         <div className="flex items-center gap-4">
-                            <NavigationMenu className="hidden md:block">
-                                <NavigationMenuList
-                                    className="gap-4 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
-                                    <NavigationMenuItem className="flex-row">
-                                        <NavigationMenuLink asChild>
-                                            <Link href="/">
-                                                <div
-                                                    className="bg-sidebar-primary text-sidebar-primary-foreground inline-flex flex-row size-6 aspect-square items-center justify-center">
-                                                    <Command size={4}/>
-                                                </div>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </NavigationMenuItem>
-                                    {MENU_ITEMS?.map((subItem) => (
-                                        <NavigationMenuItem key={subItem.title}>
-                                            <NavigationMenuLink asChild>
-                                                <Link href={subItem.url} className="inline-flex flex-row align-middle">
-                                                    <span className="align-middle mt-0.5 mr-1"><subItem.icon/></span>
-                                                    <span className="align-middle">  {subItem.title}</span>
-                                                </Link>
-                                            </NavigationMenuLink>
-                                        </NavigationMenuItem>
-                                    ))}
-                                </NavigationMenuList>
-                            </NavigationMenu>
-                            {/*<NavMenu className="hidden md:block" />*/}
+                            <TopMenu className="hidden md:block"/>
                         </div>
                         <div className="flex items-center gap-3">
-                            <Link href="/auth">
-                                <Button variant="outline" size={"sm"} className="hidden sm:inline-flex cursor-pointer">
-                                    Sign In
-                                </Button>
-                            </Link>
-                            <Link href="/auth"><Button className="cursor-pointer" size="sm">Sign Up</Button></Link>
+                            <Profile/>
                             <ThemeSelector variant='toggle'/>
-                            {/* Mobile Menu */}
-                            <div className="md:hidden">
-                                {/*<NavigationSheet />*/}
-                            </div>
                         </div>
                     </div>
                 </header>
@@ -68,7 +30,6 @@ export default function HeaderTop({children}: { children: React.ReactNode }) {
                         {children}
                     </div>
                 </main>
-
             </div>
         </>
 
