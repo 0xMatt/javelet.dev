@@ -6,6 +6,8 @@ import {FlickeringGrid} from "@/components/magicui/flickering-grid";
 import {Metadata} from "next";
 import '@/styles/global.css'
 import {Toaster} from "sonner";
+import DotPattern from "@/components/ui/dot-pattern";
+import {cn} from "@/lib/utils";
 
 export const metadata: Metadata = {
     title: {
@@ -32,6 +34,17 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             <div className="flex-1 bg-white dark:bg-black">
                 <div className="border-b border-solid border-white">
                     <div className="mx-auto w-full border-x border-border/60 relative max-w-[1360px]">
+                        <DotPattern
+                            width={20}
+                            height={20}
+                            cx={1}
+                            cy={1}
+                            cr={1}
+                            className={cn(
+                                "[mask-image:radial-gradient(ellipse,rgba(0,0,0,0.3)_30%,black_50%)]",
+                                "dark:fill-slate-700"
+                            )}
+                        />
                         <div
                             className="border-l-1 border-r-1 lg:px-20 border-white dark:border-zinc-800 bg-neutral-100 dark:bg-zinc-900">
                             <HeaderProvider>{children}</HeaderProvider>
