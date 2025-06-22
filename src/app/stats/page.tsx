@@ -6,8 +6,8 @@ import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card
 import {Clock} from "lucide-react";
 import {getContributions} from "@/services/github";
 import Calendar from "@/app/stats/_components/calendar";
-import {BorderBeam} from "@/components/magicui/border-beam";
 import Contributions from "@/app/stats/_components/contributions";
+import StatProgressCard from "@/app/stats/_components/stat-progress-card";
 
 export const metadata: Metadata = {
     title: 'Stats',
@@ -22,17 +22,18 @@ export default async function Page() {
     }
 
     const wakatime = await data.wakatime.json();
+    console.log('wakatime', wakatime.data);
     const github = await data.github.json();
-
-    console.log('github', github);
 
     const contributionCalendar =
         github.data.user.contributionsCollection?.contributionCalendar;
 
+
     return (
         <>
             <PageHeader header={metadata.title?.toString()} description={metadata.description}/>
-            <SectionTitle title="WakaTime" link={{text: '0xMatt', href: 'https://wakatime.com/@0xMatt'}}/>
+            <SectionTitle title="WakaTime"
+                          link={{text: '0xMatt', href: 'https://wakatime.com/@0xMatt', target: '_blank'}}/>
             <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
                 <Card
                     className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300 h-[110px]">
@@ -72,29 +73,17 @@ export default async function Page() {
                             {wakatime.data.best_day.text}
                         </CardTitle>
                     </CardHeader>
-                    <BorderBeam
-                        duration={6}
-                        size={400}
-                        className="from-transparent via-red-500 to-transparent"
-                    />
-                    <BorderBeam
-                        duration={6}
-                        delay={3}
-                        size={400}
-                        className="from-transparent via-blue-500 to-transparent"
-                    />
-                    <BorderBeam
-                        duration={6}
-                        delay={6}
-                        size={400}
-                        className="from-transparent via-emerald-500 to-transparent"
-                    />
                 </Card>
             </div>
-            <SectionTitle title="GitHub" link={{text: '0xMatt', href: 'https://github.com/0xMatt'}}/>
+            <div className="grid auto-rows-min gap-4 lg:grid-cols-2 grid-cols-1">
+                <StatProgressCard name="Top Languages" limit={5} data={wakatime.data.languages}/>
+                <StatProgressCard name="Top Projects" limit={5} data={wakatime.data.projects}
+                                  colors={['blue', 'purple']}/>
+
+            </div>
+            <SectionTitle title="GitHub" link={{text: '0xMatt', href: 'https://github.com/0xMatt', target: '_blank'}}/>
             <Contributions data={contributionCalendar}/>
             <Calendar data={contributionCalendar}/>
-
         </>
     );
 };

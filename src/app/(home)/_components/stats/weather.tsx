@@ -26,7 +26,10 @@ export default function Weather() {
                     {data.main.temp + '\u2109'}
                 </CardTitle>
                 <div className="line-clamp-1 flex gap-2 font-medium">
-                    {data.weather.map((tag: { description: string, icon: string }) => (
+                    {data.weather.concat([{description: 'meteors'}]).map((tag: {
+                        description: string,
+                        icon: string
+                    }) => (
                         <Badge variant="outline" key={tag.description}>
                             <Hash/>
                             {tag.description}

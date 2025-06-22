@@ -8,14 +8,17 @@ import StatSkeleton from "@/app/(home)/_components/stats/skeleton";
 import {fetcher} from "@/lib/fetcher";
 import DotPattern from "@/components/ui/dot-pattern";
 import {ShineBorder} from "@/components/magicui/shine-border";
+import {useTheme} from "next-themes";
 
 export default function WakaTime() {
+
+    const theme = useTheme();
 
     const {data} = useSWR(`/api/services/wakatime`, fetcher);
     if (!data) return (<StatSkeleton/>)
 
     const tags: string[] = ['programming', 'daily average'];
-
+    
     return (
         <Card
             className="@container/card relative border-sidebar-border/90 dark:border-sidebar-border hover:scale-102 transition-all duration-300 h-[130px]">
@@ -45,7 +48,7 @@ export default function WakaTime() {
                     ))}
                 </div>
             </CardHeader>
-            <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}/>
+            <ShineBorder shineColor={theme.theme === "dark" ? "white" : "black"}/>
         </Card>
     );
 };
