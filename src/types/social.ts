@@ -7,7 +7,10 @@ type SocialItemColor = {
 
 export type SocialItem = {
     name: string
-    href: string
+    link: {
+        href: string
+        target?: string
+    }
     icon: LucideIcon,
     class?: string
     color: SocialItemColor
