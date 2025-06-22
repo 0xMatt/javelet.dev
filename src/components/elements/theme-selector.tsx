@@ -21,7 +21,7 @@ export function ThemeSelector({variant = 'toggle|dropdown', className}: { varian
     if (variant === 'toggle') {
         return (
             <Button size="sm" variant="outline" onClick={() => setTheme(theme === 'dark' ? "light" : "dark")}
-                    className={className}>
+                    className={className} aria-label="Toggle dark/light mode">
                 <Moon
                     className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"/>
                 <Sun
