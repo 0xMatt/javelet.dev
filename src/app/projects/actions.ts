@@ -6,6 +6,7 @@ import { slugify } from '@/lib/slugify';
 import { getSession } from '@/lib/session';
 import prisma from '@/services/prisma';
 import { redirect } from 'next/navigation';
+import { Prisma } from '@prisma/client';
 
 const schema = z.object({
   name: z.string().min(5, 'Title is required and must be at least 5 characters.'),
@@ -57,10 +58,19 @@ export async function createProject(
     });
 
     return redirect(`/projects/${project.slug}`);
-  } catch (error) {
+  } catch (e) {
+    let errors = {};
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === 'P2002') {
+        errors = {
+          title: 'Project name is already taken.',
+        };
+      }
+    }
     return {
       success: false,
-      message: 'An unexpected error occurred',
+      message: 'An error occurred while creating your project.',
+      errors,
     };
   }
 }

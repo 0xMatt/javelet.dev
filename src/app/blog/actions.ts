@@ -5,6 +5,7 @@ import { slugify } from '@/lib/slugify';
 import { getSession } from '@/lib/session';
 import prisma from '@/services/prisma';
 import { BlogPostActionResponse, BlogPostData } from '@/types/blog';
+import { Prisma } from '@prisma/client';
 
 const schema = z.object({
   title: z.string().min(5, 'Title is required and must be at least 5 characters.'),
@@ -58,10 +59,19 @@ export async function createPost(
       success: true,
       message: 'Post created successfully!',
     };
-  } catch (error) {
+  } catch (e) {
+    let errors = {};
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === 'P2002') {
+        errors = {
+          title: 'Title is already taken.',
+        };
+      }
+    }
     return {
       success: false,
-      message: 'An unexpected error occurred',
+      message: 'An error occurred while creating your post.',
+      errors,
     };
   }
 }
