@@ -59,10 +59,12 @@ export default function UserDropdown({user}: { user: { name: string; email: stri
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem>
-                    <Button formAction={logout} type="submit" size="sm" className="w-full">
-                        <LogOut/>
-                        Log out
-                    </Button>
+                    <form>
+                        <Button formAction={logout} type="submit" size="sm" className="w-full cursor-pointer">
+                            <LogOut/>
+                            Log out
+                        </Button>
+                    </form>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

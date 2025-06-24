@@ -1,15 +1,15 @@
-import * as React from "react";
-import {ThemeSelector} from "@/components/elements/theme-selector";
-import TopMenu from "@/components/layout/top/menu";
-import {NavigationSheet} from "@/components/layout/top/sheet";
-import {Profile} from "@/components/layout/top/profile";
+import * as React from 'react';
+import { ThemeSelector } from '@/components/elements/theme-selector';
+import TopMenu from '@/components/layout/top/menu';
+import { NavigationSheet } from '@/components/layout/top/sheet';
+import { Profile } from '@/components/layout/top/profile';
 
 export default function HeaderTop({children}: { children: React.ReactNode }) {
     return (
         <>
             <div className="flex flex-col min-h-svh w-full bg-white dark:bg-zinc-950 relative border">
                 <header
-                    className="sticky  top-0 flex h-16 shrink-0 items-center gap-2 border-b border-b-white z-[100]">
+                    className="sticky  bg-white dark:bg-zinc-950 top-0 flex h-16 shrink-0 items-center gap-2 border-b border-b-white z-[100]">
                     <div
                         className="h-full flex items-center justify-between w-full mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="md:hidden">

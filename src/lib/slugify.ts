@@ -1,4 +1,5 @@
-export const slugify = (string: string): string => {
+export const slugify = (string: string) => {
+    if (!string) return '';
     return string
         .toString()
         .normalize('NFKD')

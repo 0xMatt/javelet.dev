@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import { cn } from '@/lib/utils';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 interface MousePosition {
   x: number;
@@ -91,10 +91,6 @@ const Particles: React.FC<ParticlesProps> = ({
   }, [color]);
 
   useEffect(() => {
-    onMouseMove();
-  }, [mousePosition.x, mousePosition.y]);
-
-  useEffect(() => {
     initCanvas();
   }, [refresh]);
 
@@ -103,7 +99,7 @@ const Particles: React.FC<ParticlesProps> = ({
     drawParticles();
   };
 
-  const onMouseMove = () => {
+  const onMouseMove = useCallback(() => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
       const { w, h } = canvasSize.current;
@@ -115,7 +111,11 @@ const Particles: React.FC<ParticlesProps> = ({
         mouse.current.y = y;
       }
     }
-  };
+  }, [mousePosition.x, mousePosition.y]);
+
+  useEffect(() => {
+    onMouseMove();
+  }, [onMouseMove]);
 
   type Circle = {
     x: number;

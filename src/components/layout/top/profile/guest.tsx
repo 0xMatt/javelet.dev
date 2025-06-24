@@ -6,12 +6,12 @@ export function GuestProfile() {
 
     return (
         <div className="flex items-center gap-3 justify-center">
-            <Link href="/auth">
+            <Link href="/auth/login">
                 <Button variant="outline" size="sm" className="cursor-pointer">
                     Sign In
                 </Button>
             </Link>
-            <Link href="/auth"><Button size="sm" className="cursor-pointer">Sign Up</Button></Link>
+            <Link href="/auth/register"><Button size="sm" className="cursor-pointer">Sign Up</Button></Link>
         </div>
     )
 }

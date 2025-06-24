@@ -22,7 +22,6 @@ export default async function Page() {
     }
 
     const wakatime = await data.wakatime.json();
-    console.log('wakatime', wakatime.data);
     const github = await data.github.json();
 
     const contributionCalendar =

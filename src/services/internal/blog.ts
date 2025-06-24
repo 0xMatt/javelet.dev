@@ -1,30 +1,14 @@
-import {
-    getFirestoreData,
-    getFirestoreDoc,
-    getFirestoreRef,
-    setFirestoreDoc,
-    updateFirestoreDoc
-} from "@/services/firestore";
-import {BlogItem} from "@/types/blog";
-import {increment} from "@firebase/firestore";
-import {slugify} from "@/lib/slugify";
+import prisma from '@/services/prisma';
 
-export const getList = () => {
-    return getFirestoreData('blog.posts');
-}
-
-export const createPost = (post: BlogItem) => {
-    setFirestoreDoc('blog.posts', slugify(post.title), post);
-}
-
-export async function updateViews(id: string) {
-    const ref = getFirestoreRef('blog.posts', id);
-    const doc = await getFirestoreDoc(ref);
-    if (doc.exists()) {
-        await updateFirestoreDoc(ref, {
-            views: increment(1)
-        });
-        return true;
-    }
-    return false;
+export async function updateViews(slug: string) {
+  try {
+    await prisma.post.update({
+      where: {
+        slug: slug,
+      },
+      data: { views: { increment: 1 } },
+    });
+  } catch (error) {
+    console.error('/api/[slug]/updateViews', error);
+  }
 }

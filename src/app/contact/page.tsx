@@ -1,9 +1,9 @@
-import ContactForm from "./components/form";
-import Meet from "@/app/contact/components/meet";
-import Social from "@/app/contact/components/social";
-import {Metadata} from "next";
-import PageHeader from "@/components/elements/page-header";
-import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
+import ContactForm from './components/form';
+import Meet from '@/app/contact/components/meet';
+import Social from '@/app/contact/components/social';
+import { Metadata } from 'next';
+import PageHeader from '@/components/elements/page-header';
+import { PlaceholderPattern } from '@/components/elements/placeholder-pattern';
 
 export const metadata: Metadata = {
     title: 'Contact',

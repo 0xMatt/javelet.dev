@@ -1,0 +1,72 @@
+// Define database connection via the `DATABASE_URL` env var
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  email     String    @unique @db.VarChar(240)
+  username  String    @db.VarChar(30)
+  password  String    @db.VarChar(60)
+  isAdmin   Boolean   @default(false)
+  sessions  Session[]
+  posts     Post[]
+}
+
+model Session {
+  id        Int       @id @default(autoincrement())
+  sid       String    @unique
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?
+  browser   String    @db.VarChar(30)
+  os        String    @db.VarChar(30)
+  device    String    @db.VarChar(30)
+  engine    String    @db.VarChar(30)
+  isBot     Boolean   @default(false)
+  location  String    @db.VarChar(90)
+  ip        String    @db.VarChar(39)
+  lastClick DateTime  @default(now())
+  expiresAt DateTime  
+}
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String    @unique
+  slug        String    @unique
+  summary     String
+  tags        String[]
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  stories     Story[]
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  publishedAt DateTime?
+}
+
+model Story {
+  id          Int     @id @default(autoincrement())
+  post        Post    @relation(fields: [id], references: [id])
+  title       String  
+  content     String 
+  file        String
+  generatedAt DateTime
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  repository  String?   @unique
+  slug        String    @unique
+  website     String?
+  tech        String[]
+  views       Int       @default(0)
+  summary     String
+  createdAt   DateTime  @default(now())
+}

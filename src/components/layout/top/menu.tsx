@@ -8,23 +8,13 @@ import {
 import Link from "next/link";
 import * as React from "react";
 import {NavigationMenuProps} from "@radix-ui/react-navigation-menu";
-import {Command} from "lucide-react";
 
 export default function TopMenu(props: NavigationMenuProps) {
     return (
         <NavigationMenu className="hidden md:block" {...props}>
             <NavigationMenuList
                 className="gap-4 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
-                <NavigationMenuItem className="flex-row">
-                    <NavigationMenuLink asChild>
-                        <Link href="/">
-                            <div
-                                className="bg-sidebar-primary text-sidebar-primary-foreground inline-flex flex-row size-6 aspect-square items-center justify-center">
-                                <Command size={4}/>
-                            </div>
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
+
                 {MENU_ITEMS?.map((subItem) => (
                     <NavigationMenuItem key={subItem.title}>
                         <NavigationMenuLink asChild>

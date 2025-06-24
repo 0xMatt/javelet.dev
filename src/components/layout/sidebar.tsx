@@ -2,7 +2,6 @@ import * as React from "react"
 import {Command} from "lucide-react"
 
 import {Navigation} from "@/components/layout/sidebar/navigation"
-import {Profile} from "@/components/layout/sidebar/profile"
 import {
     Sidebar,
     SidebarContent,
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/sidebar"
 import {SearchForm} from "@/components/layout/sidebar/search-form";
 import Link from "next/link";
+import Profile from "@/components/layout/sidebar/profile";
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     return (

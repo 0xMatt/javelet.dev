@@ -1,0 +1,8 @@
+# Ignore artifacts:
+.next
+.idea
+.vercel
+docs
+prisma
+public
+node_modules

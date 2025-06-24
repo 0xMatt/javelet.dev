@@ -12,6 +12,7 @@ export async function getContributions() {
             user(login: "${githubConfig.username}") {
               name
               contributionsCollection {
+                totalIssueContributions
                 contributionCalendar {
                   colors
                   totalContributions

@@ -1,20 +1,38 @@
-export type BlogItem = {
-    id?: string;
+import { User } from '@/types/user';
+
+export interface BlogItem {
+    id: number;
     title: string;
     slug: string;
-    summary: string;
-    author: {
-        name: string;
-        email: string;
-    },
-    tags: Array<string>;
-    stories: Array<BlogStory>;
+    summary: string | null;
+    tags: string[];
+    authorId: number;
+    author: User;
+    stories: BlogStory[];
     views: number;
-    created_at: string;
-    wpm: number;
+    createdAt: Date;
+    publishedAt?: Date | null;
 }
 
-export type BlogStory = {
+export interface BlogStory {
+  id: number;
     title: string;
     content: string;
+    file: string;
+    generatedAt: Date;
+}
+
+export interface BlogPostData {
+    title: string;
+    tags: string;
+    summary: string;
+}
+
+
+export interface BlogPostActionResponse {
+    success: boolean;
+    message: string;
+    errors?: {
+        [K in keyof BlogPostData]?: string[];
+    };
 }

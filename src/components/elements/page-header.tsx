@@ -1,4 +1,4 @@
-import {PlaceholderPattern} from "@/components/elements/placeholder-pattern";
+import { PlaceholderPattern } from '@/components/elements/placeholder-pattern';
 
 type PageHeaderProps = {
     header: string | null | undefined;
@@ -7,7 +7,7 @@ type PageHeaderProps = {
 
 const PageHeader = ({header, description}: PageHeaderProps) => {
     return (
-        <div className="flex flex-col justify-items-start mb-1">
+        <div className="flex flex-col justify-items-start mb-3">
             <h1 className=" text-2xl font-medium">{header}</h1>
             <p className="mb-3 pb-3 pt-2">
                 {description}

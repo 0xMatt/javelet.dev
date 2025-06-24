@@ -1,110 +1,107 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
-    Carousel,
-    type CarouselApi,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel";
-import {Progress} from "@/components/ui/progress";
-import useSWR from "swr";
-import {fetcher} from "@/lib/fetcher";
-import {BlogItem} from "@/types/blog";
-import {DateTime} from "luxon";
-import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
-import {Badge} from "@/components/ui/badge";
-import {Calendar, ChevronRight, Eye, Hash} from "lucide-react";
-import Link from "next/link";
-import {Button} from "@/components/ui/button";
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { Progress } from '@/components/ui/progress';
+import useSWR from 'swr';
+import { fetcher } from '@/lib/fetcher';
+import { BlogItem } from '@/types/blog';
+import { DateTime } from 'luxon';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Calendar, ChevronRight, Eye, Hash } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function BlogCarousel() {
-    const [api, setApi] = React.useState<CarouselApi>();
-    const [current, setCurrent] = React.useState(0);
-    const [count, setCount] = React.useState(0);
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
 
-    const progress = (current * 100) / count;
+  const progress = (current * 100) / count;
 
-    React.useEffect(() => {
-        if (!api) {
-            return;
-        }
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
 
-        setCount(api.scrollSnapList().length);
-        setCurrent(api.selectedScrollSnap() + 1);
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
 
-        api.on("select", () => {
-            setCurrent(api.selectedScrollSnap() + 1);
-        });
-    }, [api]);
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
-    const {data} = useSWR(`/api/blog?page=1&per_page=4`, fetcher);
-    if (!data) return <div>Loading...</div>
+  const { data } = useSWR(`/api/blog?page=1&per_page=4`, fetcher);
+  if (!data) return <div>Loading...</div>;
 
-    data.forEach((post: BlogItem) => {
-        const days = DateTime.now().diff(DateTime.fromISO(post.created_at), 'days');
-        if (days.as('days')) {
-            post.created_at = DateTime.now().minus({days: days.as('days')}).toRelative() || ''
-        }
-    })
-
+  const getFriendlyDate = (date: Date) => {
     return (
-        <>
-            <Carousel setApi={setApi} className="w-full">
-                <CarouselContent>
-                    {data.map((post: BlogItem, index: number) => (
-                        <CarouselItem key={index}>
-                            <Card
-                                className="h-[400px] p-0 gap-2 shadow-none overflow-hidden rounded-md dark:border-neutral-700 hover:scale-102 transition-all duration-300">
-                                <CardHeader className="p-0 relative">
-                                    <div className="bg-muted h-[200px] w-full border-b"/>
-                                    <div
-                                        className="line-clamp-1 flex gap-2 font-medium top-2 left-2 absolute">
-                                        {post.tags.map((tag) => (
-                                            <Badge variant="default" key={tag}>
-                                                <Hash/>
-                                                {tag}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                    <div
-                                        className="line-clamp-1 flex gap-2 font-medium bottom-4 right-2 absolute">
-                                        <Badge variant="default">
-                                            <Calendar/>
-                                            {post.created_at}
-                                        </Badge>
-                                        <Badge variant="default">
-                                            <Eye/>
-                                            {post.views}
-                                        </Badge>
-                                    </div>
-                                </CardHeader>
-                                <CardContent className="py-0 my-0 px-4">
-                                    <h3 className="mt-0 text-lg font-semibold tracking-tight">
-                                        <Link href={`/blog/${post.slug}`}
-                                              className="hover:underline">{post.title}</Link>
-                                    </h3>
-                                    <p className="mt-2 text-muted-foreground text-sm">
-                                        {post.summary}
-                                    </p>
-
-                                </CardContent>
-                                <CardFooter className="py-5 px-4">
-                                    <Link href={`/blog/${post.slug}`}><Button
-                                        className="cursor-pointer m-0 p-0 shadow-none">
-                                        5 minute read <ChevronRight/>
-                                    </Button></Link>
-                                </CardFooter>
-                            </Card>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                <CarouselPrevious className="top-[calc(100%+0.5rem)] translate-y-0 left-0"/>
-                <CarouselNext className="top-[calc(100%+0.5rem)] translate-y-0 left-2 translate-x-full"/>
-            </Carousel>
-            <Progress value={progress} className="mt-4 w-24 ml-auto"/>
-        </>
+      DateTime.now()
+        .minus({ days: DateTime.now().diff(DateTime.fromISO(date.toString())).as('days') })
+        .toRelative() || ''
     );
+  };
+
+  return (
+    <>
+      <Carousel setApi={setApi} className="w-full">
+        <CarouselContent>
+          {data.map((post: BlogItem, index: number) => (
+            <CarouselItem key={index}>
+              <Card className="h-[400px] gap-2 overflow-hidden rounded-md p-0 shadow-none transition-all duration-300 hover:scale-102 dark:border-neutral-700">
+                <CardHeader className="relative p-0">
+                  <div className="bg-muted h-[200px] w-full border-b" />
+                  <div className="absolute top-2 left-2 line-clamp-1 flex gap-2 font-medium">
+                    {post.tags.map((tag) => (
+                      <Badge variant="default" key={tag}>
+                        <Hash />
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="absolute right-2 bottom-4 line-clamp-1 flex gap-2 font-medium">
+                    <Badge variant="default">
+                      <Calendar />
+                      {getFriendlyDate(post.createdAt)}
+                    </Badge>
+                    <Badge variant="default">
+                      <Eye />
+                      {post.views}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="my-0 px-4 py-0">
+                  <h3 className="mt-0 text-lg font-semibold tracking-tight">
+                    <Link href={`/blog/${post.slug}`} className="hover:underline">
+                      {post.title}
+                    </Link>
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-sm">{post.summary}</p>
+                </CardContent>
+                <CardFooter className="px-4 py-5">
+                  <Link href={`/blog/${post.slug}`}>
+                    <Button className="m-0 cursor-pointer p-0 shadow-none">
+                      5 minute read <ChevronRight />
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="top-[calc(100%+0.5rem)] left-0 translate-y-0" />
+        <CarouselNext className="top-[calc(100%+0.5rem)] left-2 translate-x-full translate-y-0" />
+      </Carousel>
+      <Progress value={progress} className="mt-4 ml-auto w-24" />
+    </>
+  );
 }

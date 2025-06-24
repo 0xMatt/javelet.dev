@@ -6,11 +6,11 @@ import TopMenu from "@/components/layout/top/menu";
 export const NavigationSheet = () => {
     return (
         <Sheet>
-            <SheetTitle className="sr-only">
+            <SheetTitle className="sr-only m-0">
                 menu
             </SheetTitle>
             <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="sm">
                     <Menu/>
                 </Button>
             </SheetTrigger>

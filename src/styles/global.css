@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin '@tailwindcss/typography';
+
+@import '../../node_modules/@mdxeditor/editor/dist/style.css';
+
 @custom-variant dark (&:is(.dark *));
 
 

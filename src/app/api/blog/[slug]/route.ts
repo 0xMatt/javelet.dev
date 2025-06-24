@@ -1,24 +1,21 @@
-import {getFirestoreDoc, getFirestoreRef} from "@/services/firestore";
+import prisma from '@/services/prisma';
 
-export async function GET(
-    request: Request,
-    {params}: { params: Promise<{ slug: string }> }
-) {
-    const {slug} = await params
+export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
-    const ref = getFirestoreRef('blog.posts', slug);
-    const doc = await getFirestoreDoc(ref);
+  const post = await prisma.post.findUnique({
+    where: {
+      slug: slug,
+    },
+    include: {
+      author: true,
+      stories: true,
+    },
+  });
 
-    if (doc.exists()) {
-        return Response.json(doc.data())
-    } else {
-        // docSnap.data() will be undefined in this case
-        return Response.error();
-    }
-
-    return Response.json(await getFirestoreDoc(ref))
+  return Response.json(post);
 }
 
 export async function POST() {
-    return Response.json({message: 'Success'})
+  return Response.json({ message: 'Success' });
 }

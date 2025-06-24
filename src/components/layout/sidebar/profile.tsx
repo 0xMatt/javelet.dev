@@ -1,25 +1,11 @@
-import {useEffect, useState} from "react";
-import {createClient} from '@/services/supabase/client';
 import {UserProfile} from "@/components/layout/sidebar/profile/user";
 import {GuestProfile} from "@/components/layout/sidebar/profile/guest";
+import {useSession} from "@/lib/session-context";
 
-export function Profile() {
-
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const {data: {user: userData}} = await createClient().auth.getUser();
-            // @ts-expect-error remove
-            setUser(userData);
-        };
-
-        fetchUser();
-    }, []);
-
-    if (user) {
-        return (<UserProfile user={user}/>)
+export default function Profile() {
+    const session = useSession();
+    if (session && session.user) {
+        return (<UserProfile user={session.user}/>)
     }
-
     return (<GuestProfile/>)
 }
