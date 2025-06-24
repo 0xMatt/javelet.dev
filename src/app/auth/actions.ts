@@ -9,7 +9,10 @@ import { revalidatePath } from 'next/cache';
 import { LoginActionResponse, RegisterActionResponse, RegisterFormData } from '@/types/user';
 import { Prisma } from '@prisma/client';
 
-export async function login(prevState: LoginActionResponse | null | undefined, formData: FormData): Promise<LoginActionResponse> {
+export async function login(
+  prevState: LoginActionResponse | null | undefined,
+  formData: FormData,
+): Promise<LoginActionResponse> {
   const rawData = {
     username: formData.get('username') as string,
     password: formData.get('password') as string,
@@ -32,7 +35,7 @@ export async function login(prevState: LoginActionResponse | null | undefined, f
     },
   });
 
-  if (user && await bcrypt.compare(password, user.password)) {
+  if (user && (await bcrypt.compare(password, user.password))) {
     await createSession();
     await addUserToSession(user.id);
     revalidatePath('/', 'layout');
@@ -43,10 +46,12 @@ export async function login(prevState: LoginActionResponse | null | undefined, f
     success: false,
     message: 'Invalid credentials, please try again',
   };
-
 }
 
-export async function register(prevState: RegisterActionResponse | null | undefined, formData: FormData): Promise<RegisterActionResponse> {
+export async function register(
+  prevState: RegisterActionResponse | null | undefined,
+  formData: FormData,
+): Promise<RegisterActionResponse> {
   const rawData: RegisterFormData = {
     username: formData.get('username') as string,
     email: formData.get('email') as string,
@@ -84,7 +89,6 @@ export async function register(prevState: RegisterActionResponse | null | undefi
     let errors = {};
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       if (e.code === 'P2002') {
-
         errors = {
           username: 'Username is already taken.',
           email: 'Email is already taken.',

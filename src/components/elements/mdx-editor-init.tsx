@@ -1,5 +1,4 @@
-'use client'
-// InitializedMDXEditor.tsx
+'use client';
 import type { ForwardedRef } from 'react';
 import {
   BlockTypeSelect,
@@ -25,15 +24,14 @@ import {
   tablePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
-  UndoRedo
+  UndoRedo,
 } from '@mdxeditor/editor';
 import '@mdxeditor/editor/style.css';
 
-// Only import this to the next file
 export default function InitializedMDXEditor({
-                                               editorRef,
-                                               ...props
-                                             }: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) {
+  editorRef,
+  ...props
+}: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) {
   return (
     <MDXEditor
       plugins={[
@@ -50,29 +48,29 @@ export default function InitializedMDXEditor({
           toolbarContents: () => (
             <>
               <DiffSourceToggleWrapper>
-              <UndoRedo />
-              <Separator/>
-              <BoldItalicUnderlineToggles />
-              <CodeToggle/>
-              <Separator/>
-              <StrikeThroughSupSubToggles/>
-              <Separator/>
-              <ListsToggle/>
-                <Separator/>
-              <BlockTypeSelect/>
-              <Separator/>
-              <CreateLink/>
-              <InsertImage/>
-              <InsertTable/>
-              <InsertThematicBreak/>
-              <Separator/>
+                <UndoRedo />
+                <Separator />
+                <BoldItalicUnderlineToggles />
+                <CodeToggle />
+                <Separator />
+                <StrikeThroughSupSubToggles />
+                <Separator />
+                <ListsToggle />
+                <Separator />
+                <BlockTypeSelect />
+                <Separator />
+                <CreateLink />
+                <InsertImage />
+                <InsertTable />
+                <InsertThematicBreak />
+                <Separator />
               </DiffSourceToggleWrapper>
             </>
-          )
-        })
+          ),
+        }),
       ]}
       {...props}
       ref={editorRef}
     />
-  )
+  );
 }

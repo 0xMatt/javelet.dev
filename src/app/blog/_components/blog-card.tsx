@@ -46,7 +46,7 @@ export default function BlogCard({ post: post }: { post: BlogItem }) {
         </p>
       </CardContent>
       <CardFooter className="px-4 py-5">
-        <Link href={`/blog/${post.id}`}>
+        <Link href={`/blog/${post.slug}`}>
           <Button className="m-0 cursor-pointer p-0 shadow-none">
             5 minute read <ChevronRight />
           </Button>

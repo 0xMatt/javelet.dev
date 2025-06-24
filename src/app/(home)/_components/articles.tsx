@@ -8,18 +8,19 @@ import CardSkeleton from '@/components/elements/card-skeleton';
 
 export default function Articles() {
   const { data } = useSWR(`/api/blog?page=1&per_page=4`, fetcher);
-  if (!data) return (
-    <>
-      <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
-        <CardSkeleton className="h-[430px]" />
-        <CardSkeleton className="h-[430px]" />
-        <CardSkeleton className="h-[430px]" />
-      </div>
-    </>
-  );
+  if (!data)
+    return (
+      <>
+        <div className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-3">
+          <CardSkeleton className="h-[430px]" />
+          <CardSkeleton className="h-[430px]" />
+          <CardSkeleton className="h-[430px]" />
+        </div>
+      </>
+    );
 
   return (
-    <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
+    <div className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-3">
       {data.map((post: BlogItem) => (
         <BlogCard key={post.slug} post={post} />
       ))}

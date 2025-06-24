@@ -1,6 +1,6 @@
-import {getSummaries} from "@/services/wakatime";
+import { getSummaries } from '@/services/wakatime';
 
 export async function GET() {
-    const res = await getSummaries()
-    return Response.json(await res.json());
+  const res = await getSummaries();
+  return Response.json(await res.json());
 }

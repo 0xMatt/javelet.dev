@@ -5,13 +5,11 @@ import WakaTime from '@/app/(home)/_components/stats/wakatime';
 export const dynamic = 'force-dynamic';
 
 export default function Stats() {
-
   return (
-    <div className="grid auto-rows-min gap-4 lg:grid-cols-3 grid-cols-1">
+    <div className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-3">
       <WakaTime />
       <Github />
       <Weather />
     </div>
   );
-};
-
+}
