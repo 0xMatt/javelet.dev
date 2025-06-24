@@ -1,9 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import '../../node_modules/@mdxeditor/editor/dist/style.css';
 
 @plugin '@tailwindcss/typography';
-
-@import '../../node_modules/@mdxeditor/editor/dist/style.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -156,6 +155,9 @@
     --shadow-lg: var(--shadow-lg);
     --shadow-xl: var(--shadow-xl);
     --shadow-2xl: var(--shadow-2xl);
+    --duration: 0.3s;
+    --angle: 10deg;
+    --shiny-width: 100%;
     --animate-shine: shine var(--duration) infinite linear;
     @keyframes shine {
         0% {
