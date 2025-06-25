@@ -1,42 +1,13 @@
 import { MetadataRoute } from 'next';
+import { MENU_ITEMS } from '@/constants/menu';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: process.env.APP_URL as string,
+  return MENU_ITEMS.map((item) => {
+    return {
+      url: process.env.APP_URL + item.url,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: process.env.APP_URL + '/stats',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: process.env.APP_URL + '/about',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.3,
-    },
-    {
-      url: process.env.APP_URL + '/blog',
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: process.env.APP_URL + '/projects',
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.7,
-    },
-    {
-      url: process.env.APP_URL + '/contact',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.2,
-    },
-  ];
+      changeFrequency: item.changeFrequency,
+      priority: item.priority,
+    };
+  });
 }
