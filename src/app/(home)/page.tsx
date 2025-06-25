@@ -1,6 +1,6 @@
 import Intro from '@/app/(home)/_components/intro';
 import Stats from '@/app/(home)/_components/stats';
-import Articles from '@/app/(home)/_components/articles';
+import Posts from '@/app/(home)/_components/posts';
 import SectionTitle from '@/components/elements/section-title';
 
 export default async function Page() {
@@ -9,8 +9,8 @@ export default async function Page() {
       <Intro />
       <SectionTitle title="Stats on Stacks" link={{ text: 'More Stats', href: 'stats' }} />
       <Stats />
-      <SectionTitle title="Articles" link={{ text: 'View All', href: 'blog' }} />
-      <Articles />
+      <SectionTitle title="Posts" link={{ text: 'View All', href: 'blog' }} />
+      <Posts />
     </>
   );
 }

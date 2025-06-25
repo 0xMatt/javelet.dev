@@ -17,18 +17,24 @@ import {
 import * as React from 'react';
 import { MENU_ITEMS } from '@/constants/menu';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Navigation() {
   const { setOpenMobile } = useSidebar();
-
+  const pathname = usePathname();
+  console.log('pathname', pathname);
   return (
     <SidebarGroup>
       <SidebarMenu>
         {MENU_ITEMS.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <Link href={item.url} onClick={() => setOpenMobile(false)}>
+              <SidebarMenuButton asChild tooltip={item.title} className="hover:bg-red-500">
+                <Link
+                  href={item.url}
+                  onClick={() => setOpenMobile(false)}
+                  className={`hover:bg-red-400 ${pathname == '/' && pathname !== '/' && item.url.includes(pathname) ? 'bg-red-500' : ''} `}
+                >
                   <item.icon />
                   <span>{item.title}</span>
                 </Link>

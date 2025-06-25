@@ -1,54 +1,73 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
-import { Code, TrendingUp } from 'lucide-react';
-import { PlaceholderPattern } from '@/components/elements/placeholder-pattern';
-import { BackgroundPattern } from '@/components/elements/background-pattern';
+import { Code } from 'lucide-react';
+import Particles from '@/components/ui/particles';
+import { useTheme } from 'next-themes';
+import { AnimatedSpan, TypingAnimation } from '@/components/magicui/terminal';
 
 const Intro = () => {
+  const { resolvedTheme } = useTheme();
+  const isLightTheme = resolvedTheme === 'light';
   const data = {
     description: 'Welcome to the digital repository of',
     name: 'Matthew Javelet',
     tagline: {
       summary: 'still up to all sorts of shenanigans',
-      description: 'working on new projects, learning new things, and just being a good guy.',
+      description:
+        'working on new projects, learning new things, and letting my curiosity run wild.',
     },
     tags: [
       {
         icon: Code,
-        name: 'aw lawd he codin',
-      },
-      {
-        icon: TrendingUp,
-        name: 'stonks',
+        name: 'currently coding',
       },
     ],
   };
   return (
     <>
-      <Card className="@container/card relative gap-0 transition-all duration-300 hover:scale-101 dark:border-neutral-500">
-        <BackgroundPattern />
+      <Card className="@container/card relative h-[220px] gap-0 transition-all duration-300 hover:scale-101 dark:border-neutral-500">
+        <Particles
+          className="absolute inset-0"
+          quantity={100}
+          ease={80}
+          color={isLightTheme ? '#000' : '#fff'}
+          refresh
+        />
         <CardHeader>
-          <CardDescription>{data.description}</CardDescription>
+          <CardDescription>
+            <TypingAnimation delay={0}>{data.description}</TypingAnimation>
+          </CardDescription>
         </CardHeader>
-        <CardContent className="mb-2 text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-          {data.name}
+        <CardContent className="mb-3">
+          <TypingAnimation
+            delay={700}
+            className="text-3xl font-semibold tabular-nums @[250px]/card:text-3xl"
+          >
+            {data.name}
+          </TypingAnimation>
         </CardContent>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="mb-4 flex flex-wrap gap-2 font-medium">
-            {data.tags.map((tag) => (
-              <Badge variant="outline" key={tag.name}>
-                <tag.icon />
-                {tag.name}
-              </Badge>
-            ))}
+          <AnimatedSpan delay={1800} className="text-2xl">
+            <div className="mb-4 flex flex-wrap gap-2 font-medium">
+              {data.tags.map((tag) => (
+                <Badge variant="outline" key={tag.name}>
+                  <tag.icon className="animate-pulse text-emerald-500" />
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
+          </AnimatedSpan>
+
+          <div className="line-clamp-1 flex gap-2 font-medium">
+            <TypingAnimation delay={2000}>{data.tagline.summary}</TypingAnimation>
           </div>
-          <div className="line-clamp-1 flex gap-2 font-medium">{data.tagline.summary}</div>
-          <div className="text-muted-foreground">{data.tagline.description}</div>
+          <div className="text-muted-foreground">
+            <TypingAnimation delay={2400}>{data.tagline.description}</TypingAnimation>
+          </div>
         </CardFooter>
       </Card>
-      <div className="border-sidebar-border/90 dark:border-sidebar-border relative h-10 overflow-hidden rounded-xl border transition-all duration-300 hover:scale-101">
-        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20" />
-      </div>
     </>
   );
 };

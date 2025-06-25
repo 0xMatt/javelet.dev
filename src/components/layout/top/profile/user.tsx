@@ -17,7 +17,7 @@ export function UserProfile({ user }) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger className={'has-[>svg]:py-2.5 has-[>svg]:pl-0'} asChild>
           <Button
             size="sm"
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground px-0"

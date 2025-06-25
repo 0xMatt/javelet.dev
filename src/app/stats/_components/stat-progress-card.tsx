@@ -45,7 +45,11 @@ export default function StatProgressCard({
                 <Progress
                   key={index}
                   value={language.percent}
-                  className={'w-[' + language.percent + '%] h-4 [&>div]:bg-green-500'}
+                  className={
+                    'w-[' +
+                    language.percent +
+                    '%] h-4 [&>div]:bg-emerald-500 dark:[&>div]:bg-emerald-500'
+                  }
                 />
               </div>
             ),

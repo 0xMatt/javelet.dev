@@ -36,26 +36,26 @@ export default function Contributions({ data }: ContributionProps) {
         label="Total"
         icon={Activity}
         number={totalContributions}
-        fontClass={'text-emerald-500'}
+        fontClass={'text-emerald-500 dark:text-emerald-400'}
       />
       <StatCard
         label="This Week"
         icon={Activity}
         number={totalThisWeekContribution}
-        fontClass={'text-emerald-500'}
+        fontClass={'text-emerald-500 dark:text-emerald-400'}
       />
       <StatCard
         label="Best Day"
         icon={Activity}
         number={bestContribution}
-        fontClass={'text-emerald-500'}
+        fontClass={'text-emerald-500 dark:text-emerald-400'}
       />
       <StatCard
         label="Monthly Average"
         icon={Activity}
         number={averageContribution}
         unit="/month"
-        fontClass={'text-emerald-500'}
+        fontClass="text-emerald-500 dark:text-emerald-400"
       />
     </div>
   );

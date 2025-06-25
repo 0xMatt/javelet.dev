@@ -6,13 +6,15 @@ import { Badge } from '@/components/ui/badge';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
 import CardSkeleton from '@/components/elements/card-skeleton';
+import { PlaceholderPattern } from '@/components/elements/placeholder-pattern';
 
 export default function Github() {
   const { data } = useSWR(`/api/services/github`, fetcher);
   if (!data) return <CardSkeleton className="h-[130px]" />;
 
   return (
-    <Card className="border-sidebar-border/90 dark:border-sidebar-border @container/card relative h-[130px] transition-all duration-300 hover:scale-102">
+    <Card className="border-sidebar-border/90 dark:border-sidebar-border @container/card relative h-[130px] overflow-hidden transition-all duration-300 hover:scale-102">
+      <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20" />
       <CardHeader>
         <CardDescription className={'flex flex-1'}>
           <GithubIcon size={13} className={'my-1 mr-2'} />

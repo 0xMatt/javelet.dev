@@ -1,4 +1,13 @@
-import { AtSignIcon, ChartAreaIcon, CoffeeIcon, Computer, HomeIcon, Palette, Rss, User, } from 'lucide-react';
+import {
+  AtSignIcon,
+  ChartAreaIcon,
+  CoffeeIcon,
+  Computer,
+  HomeIcon,
+  Layers,
+  Rss,
+  User,
+} from 'lucide-react';
 import { MenuItem } from '@/types/menu';
 
 export const MENU_ITEMS: Array<MenuItem> = [
@@ -62,7 +71,7 @@ export const MENU_ITEMS: Array<MenuItem> = [
   {
     title: 'Colophon',
     url: '/colophon',
-    icon: Palette,
+    icon: Layers,
     isActive: true,
     changeFrequency: 'weekly',
     priority: 1.4,

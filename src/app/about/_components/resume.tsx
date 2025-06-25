@@ -18,7 +18,7 @@ export default function Resume() {
         </div>
       </div>
       <iframe
-        className="h-screen"
+        className="h-screen w-full"
         src="https://docs.google.com/document/d/e/2PACX-1vSJUHf55XVETkIOGSoYlsgEPV7WJUsIC2irrVfRT7V5zbTe-Zx3BWhW3qTe2Xd3h8awmKzuhYFtxUvL/pub?embedded=true"
       ></iframe>
     </>

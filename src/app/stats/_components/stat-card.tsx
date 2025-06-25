@@ -35,10 +35,8 @@ export default function StatCard({
         <CardDescription className={'flex flex-1'}>
           <span className={'text-sm'}>{label}</span>
         </CardDescription>
-        <CardTitle className={cn('text-lg', fontClass)}>
-          {typeof number !== 'undefined' && (
-            <NumberTicker value={number} className={'text-emerald-500'} />
-          )}
+        <CardTitle className="text-lg">
+          {typeof number !== 'undefined' && <NumberTicker value={number} className={fontClass} />}
           {typeof value !== 'undefined' && value}
           {unit}
         </CardTitle>

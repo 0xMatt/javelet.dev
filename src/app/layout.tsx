@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     template: '%s | Matthew Javelet',
     default: 'Matthew Javelet',
   },
+  authors: [
+    {
+      name: 'Matthew Javelet',
+      url: 'https://www.javelet.work',
+    },
+  ],
   description:
     "Matthew Javelet's website for sharing programming stats, cataloging my ramblings and displaying personal and professional details.",
   metadataBase: new URL(process.env.APP_URL || ''),

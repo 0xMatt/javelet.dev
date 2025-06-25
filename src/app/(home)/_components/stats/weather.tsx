@@ -14,7 +14,7 @@ export default function Weather() {
 
   return (
     <Card className="border-sidebar-border/90 dark:border-sidebar-border @container/card relative h-[130px] overflow-hidden transition-all duration-300 hover:scale-102">
-      <Meteors number={100} />
+      <Meteors number={50} />
       <CardHeader>
         <CardDescription className={'flex flex-1'}>
           <Cloud size={13} className={'my-1 mr-2'} />

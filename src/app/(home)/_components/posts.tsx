@@ -6,7 +6,7 @@ import BlogCard from '@/app/blog/_components/blog-card';
 import { fetcher } from '@/lib/fetcher';
 import CardSkeleton from '@/components/elements/card-skeleton';
 
-export default function Articles() {
+export default function Posts() {
   const { data } = useSWR(`/api/blog?page=1&per_page=4`, fetcher);
   if (!data)
     return (
