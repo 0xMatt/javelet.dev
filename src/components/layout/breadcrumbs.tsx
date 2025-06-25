@@ -9,7 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
-import { ChevronsRight, FileText, Home } from 'lucide-react';
+import { ChevronsRight, Home } from 'lucide-react';
 import { MENU_ITEMS } from '@/constants/menu';
 
 const NextBreadcrumb = () => {
@@ -36,34 +36,30 @@ const NextBreadcrumb = () => {
             currentPage++;
             const href = `/${pathNames.slice(0, index + 1).join('/')}`;
             const itemLink = link[0].toUpperCase() + link.slice(1, link.length);
-            let page = MENU_ITEMS.find((n) => {
+            const page = MENU_ITEMS.find((n) => {
               return n.title === itemLink;
             });
 
             if (typeof page === 'undefined') {
-              page = {
-                title: itemLink,
-                url: href,
-                icon: FileText,
-              };
+              return;
             }
             return (
-              <>
-                <ChevronsRight size={14} key={`chevron-${index}`} />
-                <BreadcrumbItem key={'bci' + index}>
+              <div className="inline-flex" key={index}>
+                <ChevronsRight size={14} className="mt-1 mr-2" />
+                <BreadcrumbItem>
                   {currentPage !== totalPages ? (
-                    <BreadcrumbLink href={href} className="mt-0.5 inline-flex gap-2" key={index}>
+                    <BreadcrumbLink href={href} className="mt-0.5 inline-flex gap-2">
                       <page.icon size={18} className="mt-1 inline" />
                       <span>{itemLink}</span>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="mt-0.5 inline-flex gap-2" key={index}>
+                    <BreadcrumbPage className="mt-0.5 inline-flex gap-2">
                       <page.icon size={18} className="inline" />
                       <span>{itemLink}</span>
                     </BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-              </>
+              </div>
             );
           })}
         </BreadcrumbList>
