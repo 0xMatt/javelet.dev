@@ -33,7 +33,7 @@ export const MENU_ITEMS: Array<MenuItem> = [
     icon: User,
     isActive: true,
     changeFrequency: 'weekly',
-    priority: 0.3,
+    priority: 0.2,
   },
 
   {
@@ -66,7 +66,7 @@ export const MENU_ITEMS: Array<MenuItem> = [
     icon: Computer,
     isActive: true,
     changeFrequency: 'weekly',
-    priority: 1.3,
+    priority: 0.3,
   },
   {
     title: 'Colophon',
@@ -74,6 +74,6 @@ export const MENU_ITEMS: Array<MenuItem> = [
     icon: Layers,
     isActive: true,
     changeFrequency: 'weekly',
-    priority: 1.4,
+    priority: 0.4,
   },
 ];
