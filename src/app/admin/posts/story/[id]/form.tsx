@@ -38,7 +38,7 @@ export default function StoryForm({ story }: { story: Story }) {
           <div className="flex flex-col gap-3">
             <Label htmlFor="summary">Content</Label>
             <ForwardRefEditor
-              markdown={story.content as string}
+              markdown={story.content ? story.content : ''}
               contentEditableClassName="prose"
               onChange={setContent}
             />

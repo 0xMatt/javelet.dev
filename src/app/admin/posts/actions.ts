@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { slugify } from '@/lib/slugify';
 import { getSession } from '@/lib/session';
 import prisma from '@/services/prisma';
-import { BlogPostActionResponse, BlogPostStoryResponse, PostForm, Story } from '@/types/blog';
+import { BlogPostActionResponse, BlogPostStoryResponse, Post, PostForm, Story } from '@/types/blog';
 import { Prisma } from '@prisma/client';
 
 const schema = z.object({
@@ -210,4 +210,20 @@ export async function updateStory(
       payload: rawData,
     };
   }
+}
+
+export async function togglePublish(post: Post): Promise<Post> {
+  const data = await prisma.post.update({
+    where: {
+      slug: post.slug,
+    },
+    include: {
+      author: true,
+      stories: true,
+    },
+    data: {
+      publishedAt: post.publishedAt ? null : new Date(),
+    },
+  });
+  return data;
 }

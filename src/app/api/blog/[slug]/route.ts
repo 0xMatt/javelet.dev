@@ -6,6 +6,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
   const post = await prisma.post.findUnique({
     where: {
       slug: slug,
+      publishedAt: {
+        lte: new Date(),
+      },
     },
     include: {
       author: true,

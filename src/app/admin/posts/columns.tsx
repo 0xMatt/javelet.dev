@@ -1,7 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { BadgeAlert, BadgeCheckIcon, MoreHorizontal } from 'lucide-react';
+import { BadgeCheckIcon, MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,6 +18,7 @@ import { Post, Story } from '@/types/blog';
 import { User } from '@/types/user';
 import PostDrawer from '@/app/admin/posts/post';
 import StoryCommand from '@/app/admin/posts/story';
+import Publish from '@/app/admin/posts/publish';
 
 export const columns: ColumnDef<Post>[] = [
   {
@@ -79,25 +80,17 @@ export const columns: ColumnDef<Post>[] = [
     accessorKey: 'publishedAt',
     header: 'Published',
     cell: ({ row }) => {
-      const published = row.getValue('publishedAt');
-      if (!published) {
-        return (
-          <Badge variant="secondary" className="bg-red-500 text-white dark:bg-red-600">
-            <BadgeAlert size={'icon'} /> unpublished
-          </Badge>
-        );
-      }
-      return (
-        <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
-          <BadgeCheckIcon /> {published.toString()}
-        </Badge>
-      );
+      return <Publish post={row.original as Post} />;
     },
   },
   {
     id: 'actions',
     cell: ({ row }) => {
       const post = row.original as Post;
+
+      const handler = () => {
+        console.log('handled!');
+      };
 
       return (
         <DropdownMenu>
@@ -112,10 +105,12 @@ export const columns: ColumnDef<Post>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(post.id ? post.id.toString() : '')}
             >
-              Copy user ID
+              Copy Post ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Post</DropdownMenuItem>
+            <DropdownMenuItem onClick={handler}>
+              {post.publishedAt ? 'Unpublish' : 'Publish'}
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive">Delete Post</DropdownMenuItem>
           </DropdownMenuContent>

@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       {
         '@type': 'Person',
         name: 'Matthew Javelet',
-        url: 'https://www.javelet.work',
+        url: process.env.APP_URL,
       },
     ],
   };

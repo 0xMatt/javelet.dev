@@ -15,6 +15,11 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const posts: Post[] = await prisma.post.findMany({
+    where: {
+      publishedAt: {
+        lte: new Date(),
+      },
+    },
     include: {
       author: true,
       stories: true,
@@ -30,7 +35,7 @@ export default async function Page() {
             <div className="hover:bg-secondary/50 border p-4 transition-colors duration-300 ease-in-out">
               <Link
                 href={`/blog/${post.slug}`}
-                className="flex flex-col gap-4 transition-colors duration-300 ease-in-out sm:flex-row"
+                className="transitFion-colors flex flex-col gap-4 duration-300 ease-in-out sm:flex-row"
               >
                 <div className="max-w-3xs sm:shrink-0">
                   <Image
