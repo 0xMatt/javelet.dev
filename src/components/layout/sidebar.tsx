@@ -15,6 +15,7 @@ import {
 import { SearchForm } from '@/components/layout/sidebar/search-form';
 import Link from 'next/link';
 import Profile from '@/components/layout/sidebar/profile';
+import { AdminMenu } from '@/components/layout/sidebar/admin';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -40,6 +41,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarHeader>
         <SidebarContent>
           <Navigation />
+          <AdminMenu className="mt-auto" />
         </SidebarContent>
         <SidebarFooter>
           <Profile />

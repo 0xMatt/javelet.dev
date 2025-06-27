@@ -22,7 +22,6 @@ import { usePathname } from 'next/navigation';
 export function Navigation() {
   const { setOpenMobile } = useSidebar();
   const pathname = usePathname();
-  console.log('pathname', pathname);
   return (
     <SidebarGroup>
       <SidebarMenu>
