@@ -3,8 +3,19 @@
 @import '../../node_modules/@mdxeditor/editor/dist/style.css';
 
 @plugin '@tailwindcss/typography';
-
 @custom-variant dark (&:is(.dark *));
+
+.prose {
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    h1, h2, h3, h4, h5, h6, p, ul, li, ol, p, blockquote, pre, strong, sub, sup, tt, var, a{
+        color: #fff;
+    }
+}
+
+.prose strong {
+    font-weight: 600;
+}
 
 
 :root {

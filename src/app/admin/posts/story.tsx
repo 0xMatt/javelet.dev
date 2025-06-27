@@ -7,20 +7,21 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { BlogPostStoryResponse, BlogStory } from '@/types/blog';
+import { BlogPostStoryResponse, Story } from '@/types/blog';
 import { FileText } from 'lucide-react';
 import { useActionState, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Form from 'next/form';
-import { createStory } from '@/app/blog/actions';
+import { createStory } from '@/app/admin/posts/actions';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 const initialState: BlogPostStoryResponse = {
   success: false,
   message: '',
 };
 
-export default function Story({ postId, stories }: { postId: number; stories: BlogStory[] }) {
+export default function StoryCommand({ postId, stories }: { postId: number; stories: Story[] }) {
   const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(createStory, initialState);
 
@@ -40,7 +41,9 @@ export default function Story({ postId, stories }: { postId: number; stories: Bl
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Stories">
             {stories.map((story, index) => (
-              <CommandItem key={index}>{story.title}</CommandItem>
+              <Link href={`/admin/posts/story/${story.id}`} key={index}>
+                <CommandItem className="cursor-pointer">{story.title}</CommandItem>
+              </Link>
             ))}
           </CommandGroup>
           <CommandSeparator />

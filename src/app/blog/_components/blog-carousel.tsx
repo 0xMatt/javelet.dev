@@ -12,7 +12,7 @@ import {
 import { Progress } from '@/components/ui/progress';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
-import { BlogItem } from '@/types/blog';
+import { Post } from '@/types/blog';
 import { DateTime } from 'luxon';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -55,7 +55,7 @@ export default function BlogCarousel() {
     <>
       <Carousel setApi={setApi} className="w-full">
         <CarouselContent>
-          {data.map((post: BlogItem, index: number) => (
+          {data.map((post: Post, index: number) => (
             <CarouselItem key={index}>
               <Card className="h-[400px] gap-2 overflow-hidden rounded-md p-0 shadow-none transition-all duration-300 hover:scale-102 dark:border-neutral-700">
                 <CardHeader className="relative p-0">

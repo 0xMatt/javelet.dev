@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useActionState } from 'react';
-import { createPost } from '@/app/blog/actions';
+import { createPost } from '@/app/admin/posts/actions';
 import { BlogPostActionResponse, Post } from '@/types/blog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle2 } from 'lucide-react';

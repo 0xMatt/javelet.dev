@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Hash } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Post } from '@/types/blog';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const posts = await prisma.post.findMany({
+  const posts: Post[] = await prisma.post.findMany({
     include: {
       author: true,
       stories: true,
@@ -31,7 +33,12 @@ export default async function Page() {
                 className="flex flex-col gap-4 transition-colors duration-300 ease-in-out sm:flex-row"
               >
                 <div className="max-w-3xs sm:shrink-0">
-                  <img src="https://placehold.co/600x400" />
+                  <Image
+                    src="https://placehold.co/600x400"
+                    width={600}
+                    height={400}
+                    alt="Placeholder image"
+                  />
                 </div>
                 <div className="grow">
                   <h3 className="mb-2 text-lg leading-6 font-medium">{post.title}</h3>

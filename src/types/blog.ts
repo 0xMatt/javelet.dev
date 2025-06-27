@@ -8,45 +8,44 @@ export interface Post {
   tags: string[];
   authorId: number;
   author: User;
-  stories: BlogStory[];
+  stories: Story[];
   views: number;
   createdAt: Date;
-  publishedAt?: Date | null;
+  updatedAt: Date;
+  publishedAt: Date | null;
 }
 
-export interface BlogItem {
-  id: number;
+export interface PostForm {
+  id?: number;
   title: string;
   slug: string;
-  summary: string | null;
-  tags: string[];
-  authorId: number;
-  author: User;
-  stories: BlogStory[];
-  views: number;
-  createdAt: Date;
+  summary: string;
+  tags: string[] | string;
+  authorId?: number;
+  author?: User;
+  stories?: Story[];
+  views?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
   publishedAt?: Date | null;
 }
 
-export interface BlogStory {
-  id: number;
-  postId: number;
+export interface Story {
+  id?: string | number;
+  postId?: number | string;
   title: string;
   content?: string | null;
   file?: string | null | undefined;
   generatedAt?: Date | null | undefined;
 }
 
-export interface BlogStoryBasicData {
+export interface StoryForm {
+  id?: string | number;
+  postId?: number | string;
   title: string;
-  postId: string | number;
-}
-
-export interface BlogPostBasicData {
-  title: string;
-  slug?: string;
-  tags?: string;
-  summary: string;
+  content?: string | null;
+  file?: string | null | undefined;
+  generatedAt?: Date | null | undefined;
 }
 
 export interface BlogPostResponse {
@@ -56,14 +55,14 @@ export interface BlogPostResponse {
 
 export interface BlogPostActionResponse extends BlogPostResponse {
   errors?: {
-    [K in keyof BlogPostBasicData]?: string[];
+    [K in keyof PostForm]?: string[];
   };
-  payload?: BlogPostBasicData | null;
+  payload?: PostForm | null;
 }
 
 export interface BlogPostStoryResponse extends BlogPostResponse {
   errors?: {
-    [K in keyof BlogStoryBasicData]?: string[];
+    [K in keyof StoryForm]?: string[];
   };
-  payload?: BlogStoryBasicData | null;
+  payload?: StoryForm | null;
 }

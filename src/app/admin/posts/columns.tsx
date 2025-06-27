@@ -14,10 +14,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { BlogStory, Post } from '@/types/blog';
+import { Post, Story } from '@/types/blog';
 import { User } from '@/types/user';
 import PostDrawer from '@/app/admin/posts/post';
-import Story from '@/app/admin/posts/story';
+import StoryCommand from '@/app/admin/posts/story';
 
 export const columns: ColumnDef<Post>[] = [
   {
@@ -67,8 +67,8 @@ export const columns: ColumnDef<Post>[] = [
     accessorKey: 'stories',
     header: () => <div>Stories</div>,
     cell: ({ row }) => {
-      const stories = row.getValue('stories') as BlogStory[];
-      return <Story postId={row.original.id} stories={stories} />;
+      const stories = row.getValue('stories') as Story[];
+      return <StoryCommand postId={row.original.id as number} stories={stories} />;
     },
   },
   {
@@ -97,7 +97,7 @@ export const columns: ColumnDef<Post>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
-      const payment = row.original;
+      const post = row.original as Post;
 
       return (
         <DropdownMenu>
@@ -109,7 +109,9 @@ export const columns: ColumnDef<Post>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id.toString())}>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(post.id ? post.id.toString() : '')}
+            >
               Copy user ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />

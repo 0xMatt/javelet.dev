@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { slugify } from '@/lib/slugify';
 import { getSession } from '@/lib/session';
 import prisma from '@/services/prisma';
-import { BlogPostActionResponse, BlogPostBasicData, BlogPostStoryResponse, BlogStoryBasicData, } from '@/types/blog';
+import { BlogPostActionResponse, BlogPostStoryResponse, PostForm, Story } from '@/types/blog';
 import { Prisma } from '@prisma/client';
 
 const schema = z.object({
@@ -19,7 +19,7 @@ export async function createPost(
   prevState: BlogPostActionResponse | null,
   formData: FormData,
 ): Promise<BlogPostActionResponse> {
-  const rawData: BlogPostBasicData = {
+  const rawData: PostForm = {
     title: formData.get('title') as string,
     slug: formData.get('slug') as string,
     tags: formData.get('tags') as string,
@@ -31,8 +31,6 @@ export async function createPost(
   const validatedData = schema.safeParse(rawData);
 
   if (!validatedData.success) {
-    console.log('rawData', rawData);
-
     return {
       success: false,
       message: 'Please fix the errors in the form',
@@ -52,11 +50,19 @@ export async function createPost(
 
   try {
     if (rawData.slug) {
-      console.log('create');
-      await update(validatedData.data);
+      await update(
+        validatedData.data.slug,
+        validatedData.data.title,
+        validatedData.data.summary,
+        typeof validatedData.data.tags === 'string' ? validatedData.data.tags?.split(',') : [],
+      );
     } else {
-      console.log('update');
-      await create(validatedData.data, session.user.id);
+      await create(
+        session.user.id,
+        validatedData.data.title,
+        validatedData.data.summary,
+        typeof validatedData.data.tags === 'string' ? validatedData.data.tags?.split(',') : [],
+      );
     }
 
     return {
@@ -82,13 +88,13 @@ export async function createPost(
   }
 }
 
-function create(data: BlogPostBasicData, userId: number) {
+function create(userId: number, title: string, summary: string, tags: string[]) {
   return prisma.post.create({
     data: {
-      title: data.title,
-      slug: slugify(data.title),
-      summary: data.summary,
-      tags: data.tags?.split(','),
+      title: title,
+      slug: slugify(title),
+      summary: summary,
+      tags: tags,
       authorId: userId,
       views: 0,
       createdAt: new Date(),
@@ -96,21 +102,20 @@ function create(data: BlogPostBasicData, userId: number) {
   });
 }
 
-async function update(data: BlogPostBasicData) {
-  console.log('dat', data);
+async function update(slug: string | undefined, title: string, summary: string, tags: string[]) {
   return prisma.post.update({
-    where: { slug: data.slug },
+    where: { slug: slug },
     data: {
-      title: data.title,
-      slug: slugify(data.title),
-      summary: data.summary,
-      tags: data.tags?.split(','),
+      title: title,
+      slug: slugify(title),
+      summary: summary,
+      tags: tags,
       updatedAt: new Date(),
     },
   });
 }
 
-const storySchema = z.object({
+const storyCreateSchema = z.object({
   title: z.string().min(5, 'Title is required and must be at least 5 characters.'),
   postId: z.string(),
 });
@@ -119,12 +124,12 @@ export async function createStory(
   prevState: BlogPostStoryResponse | null,
   formData: FormData,
 ): Promise<BlogPostStoryResponse> {
-  const rawData: BlogStoryBasicData = {
+  const rawData: Story = {
     title: formData.get('title') as string,
     postId: formData.get('postId') as string,
   };
 
-  const validatedData = storySchema.safeParse(rawData);
+  const validatedData = storyCreateSchema.safeParse(rawData);
   if (!validatedData.success) {
     return {
       success: false,
@@ -140,6 +145,56 @@ export async function createStory(
       data: {
         postId: postId,
         title: validatedData.data.title,
+      },
+    });
+
+    return {
+      success: true,
+      message: 'Post created successfully!',
+    };
+  } catch (e) {
+    console.log('error', e);
+    return {
+      success: false,
+      message: 'An error occurred while creating your post.',
+      payload: rawData,
+    };
+  }
+}
+
+const storyUpdateSchema = z.object({
+  title: z.string().min(5, 'Title is required and must be at least 5 characters.'),
+  content: z.string().min(5, 'Content is required and must be at least 5 characters.'),
+  id: z.string(),
+});
+
+export async function updateStory(
+  prevState: BlogPostStoryResponse | null,
+  formData: FormData,
+): Promise<BlogPostStoryResponse> {
+  const rawData: Story = {
+    id: formData.get('id') as string,
+    title: formData.get('title') as string,
+    content: formData.get('content') as string,
+  };
+
+  const validatedData = storyUpdateSchema.safeParse(rawData);
+  if (!validatedData.success) {
+    return {
+      success: false,
+      message: 'Please fix the errors in the form',
+      errors: validatedData.error.flatten().fieldErrors,
+      payload: rawData,
+    };
+  }
+
+  try {
+    const id: number = +validatedData.data.id as number;
+    await prisma.story.update({
+      where: { id: id },
+      data: {
+        title: validatedData.data.title,
+        content: validatedData.data.content,
       },
     });
 
