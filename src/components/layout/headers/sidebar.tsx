@@ -2,6 +2,9 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import NextBreadcrumb from '@/components/layout/breadcrumbs';
 import { ThemeSelector } from '@/components/elements/theme-selector';
 import { AppSidebar } from '@/components/layout/sidebar';
+import Link from 'next/link';
+import { Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function HeaderSiderbar({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +17,11 @@ export function HeaderSiderbar({ children }: { children: React.ReactNode }) {
           </div>
           <NextBreadcrumb />
           <div className="mr-5 ml-auto flex items-center gap-2">
+            <Link href="https://github.com/0xMatt/javelet.dev" target="_blank">
+              <Button size="sm" className="cursor-pointer">
+                <Github />
+              </Button>
+            </Link>
             <ThemeSelector variant="toggle" className={'cursor-pointer'} />
           </div>
         </header>
