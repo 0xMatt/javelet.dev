@@ -3,7 +3,7 @@ import Stats from '@/app/(home)/_components/stats';
 import Posts from '@/app/(home)/_components/posts';
 import SectionTitle from '@/components/elements/section-title';
 
-export default async function Page() {
+export default function Page() {
   return (
     <>
       <Intro />

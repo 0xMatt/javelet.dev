@@ -1,32 +1,45 @@
-import {MetadataRoute} from 'next';
-import {MENU_ITEMS} from '@/constants/menu';
-import prisma from "@/services/prisma";
+import { MetadataRoute } from 'next';
+import { MENU_ITEMS } from '@/constants/menu';
+import prisma from '@/services/prisma';
 
 let posts: Array<{
-    url: string;
-    lastModified: Date;
-    changeFrequency: "weekly" | "always" | "hourly" | "daily" | "monthly" | "yearly" | "never" | undefined;
-    priority: number;
+  url: string;
+  lastModified: Date;
+  changeFrequency:
+    | 'weekly'
+    | 'always'
+    | 'hourly'
+    | 'daily'
+    | 'monthly'
+    | 'yearly'
+    | 'never'
+    | undefined;
+  priority: number;
 }> = [];
 
-const data =  await prisma.post.findMany();
-posts = data.map(post => {
-    console.log('post', post);
-    return {
-        url: process.env.APP_URL + '/blog/' + post.slug,
-        lastModified: post.createdAt,
-        changeFrequency: 'weekly',
-        priority: 0.9
-    }
+const data = await prisma.post.findMany({
+  where: {
+    publishedAt: {
+      lte: new Date(),
+    },
+  },
+});
+posts = data.map((post) => {
+  return {
+    url: process.env.APP_URL + '/blog/' + post.slug,
+    lastModified: post.createdAt,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  };
 });
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    return MENU_ITEMS.map((item) => {
-        return {
-            url: process.env.APP_URL + item.url,
-            lastModified: new Date(),
-            changeFrequency: item.changeFrequency,
-            priority: item.priority,
-        };
-    }).concat(posts);
+  return MENU_ITEMS.map((item) => {
+    return {
+      url: process.env.APP_URL + item.url,
+      lastModified: new Date(),
+      changeFrequency: item.changeFrequency,
+      priority: item.priority,
+    };
+  }).concat(posts);
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { BlogItem } from '@/types/blog';
+import { Post } from '@/types/blog';
 import BlogCard from '@/app/blog/_components/blog-card';
 import { fetcher } from '@/lib/fetcher';
 import CardSkeleton from '@/components/elements/card-skeleton';
@@ -21,7 +21,7 @@ export default function Posts() {
 
   return (
     <div className="grid auto-rows-min grid-cols-1 gap-4 lg:grid-cols-3">
-      {data.map((post: BlogItem) => (
+      {data.map((post: Post) => (
         <BlogCard key={post.slug} post={post} />
       ))}
     </div>

@@ -3,11 +3,12 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Eye, FileText, Hash, ThumbsUp } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { updateViews } from '@/services/internal/blog';
+import { Post, Story } from '@/types/blog';
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const res = await fetch(process.env.APP_URL + `/api/blog/${slug}`);
-  const post = await res.json();
+  const post: Post = await res.json();
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -19,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       {
         '@type': 'Person',
         name: 'Matthew Javelet',
-        url: 'https://www.javelet.work',
+        url: process.env.APP_URL,
       },
     ],
   };
@@ -33,7 +34,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <>
-      <section className="col-start-2 flex flex-col gap-y-6 text-center">
+      <section className="col-start-2 mt-10 flex flex-col gap-y-6 text-center">
         {/* Add JSON-LD to page */}
         <script
           type="application/ld+json"
@@ -61,14 +62,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               <span>{createdAt}</span>
             </div>
             <div className="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-              <span>
-                8 min read{' '}
-                <span className="text-muted-foreground">(n+stories wpm min read total)</span>
-              </span>
+              <span>8 min read </span>
             </div>
             <div className="flex w-full items-center justify-center gap-1 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
               <FileText size={16} />
-              16 subposts
+              {post.stories.length} subposts
             </div>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
@@ -122,34 +120,38 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </a>
         </nav>
       </section>
-      <div className="sticky top-20 col-start-1 mr-8 ml-auto hidden h-[calc(100vh-5rem)] xl:block">
-        <div className="bg-muted border p-2">
-          <ul className="flex list-none flex-col gap-y-2">
-            <li className="text-foreground/60 text-xs">
-              <a
-                href="#"
-                className="marker:text-foreground/30 hover:text-foreground/60 text-foreground list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
-              >
-                Subpost Title The Long Way
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div className="sticky top-20 left-0 col-start-1 mr-0 hidden h-[calc(100vh-5rem)] w-full pr-5 xl:block">
+        {post.stories.map((story: Story, index: number) => (
+          <div className="bg-muted mb-2 border p-2" key={index}>
+            <ul className="flex list-none flex-col gap-y-2">
+              <li className="text-foreground/60 text-xs">
+                <a
+                  href="#"
+                  className="marker:text-foreground/30 hover:text-foreground/60 text-foreground list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+                >
+                  {story.title}
+                </a>
+              </li>
+            </ul>
+          </div>
+        ))}
       </div>
       <article className="prose col-start-2 max-w-none text-white">{post.summary}</article>
-      <div className="sticky top-20 col-start-3 mr-auto ml-8 hidden h-[calc(100vh-5rem)] xl:block">
-        <div className="bg-muted border p-2">
-          <ul className="flex list-none flex-col gap-y-2">
-            <li className="text-foreground/60 text-xs">
-              <a
-                href="#"
-                className="marker:text-foreground/30 hover:text-foreground/60 text-foreground list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
-              >
-                Subpost Title The Long Way
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div className="sticky top-20 col-start-3 mr-auto ml-4 hidden h-[calc(100vh-5rem)] w-full xl:block">
+        {post.stories.map((story: Story, index: number) => (
+          <div className="bg-muted mb-2 border p-2" key={index}>
+            <ul className="flex list-none flex-col gap-y-2">
+              <li className="text-foreground/60 text-xs">
+                <a
+                  href="#"
+                  className="marker:text-foreground/30 hover:text-foreground/60 text-foreground list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
+                >
+                  {story.title}
+                </a>
+              </li>
+            </ul>
+          </div>
+        ))}
       </div>
     </>
   );
