@@ -68,8 +68,7 @@ export const columns: ColumnDef<Post>[] = [
     header: () => <div>Stories</div>,
     cell: ({ row }) => {
       const stories = row.getValue('stories') as BlogStory[];
-
-      return <Story stories={stories} />;
+      return <Story postId={row.original.id} stories={stories} />;
     },
   },
   {
@@ -90,7 +89,7 @@ export const columns: ColumnDef<Post>[] = [
       }
       return (
         <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
-          <BadgeCheckIcon /> {published}
+          <BadgeCheckIcon /> {published.toString()}
         </Badge>
       );
     },

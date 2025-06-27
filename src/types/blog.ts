@@ -30,14 +30,16 @@ export interface BlogItem {
 
 export interface BlogStory {
   id: number;
+  postId: number;
   title: string;
-  content?: string;
+  content?: string | null;
   file?: string | null | undefined;
   generatedAt?: Date | null | undefined;
 }
 
 export interface BlogStoryBasicData {
   title: string;
+  postId: string | number;
 }
 
 export interface BlogPostBasicData {

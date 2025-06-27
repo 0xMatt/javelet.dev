@@ -20,7 +20,7 @@ const initialState: BlogPostStoryResponse = {
   message: '',
 };
 
-export default function Story({ stories }: { stories: BlogStory[] }) {
+export default function Story({ postId, stories }: { postId: number; stories: BlogStory[] }) {
   const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(createStory, initialState);
 
@@ -28,6 +28,7 @@ export default function Story({ stories }: { stories: BlogStory[] }) {
     e.preventDefault();
     setOpen((open) => !open);
   };
+
   return (
     <>
       <Button variant="link" className="inline-flex" onClick={click}>
@@ -55,6 +56,7 @@ export default function Story({ stories }: { stories: BlogStory[] }) {
           <Button type="submit" className="w-full">
             {pending ? 'Creating...' : 'Create'}
           </Button>
+          <input type="hidden" name="postId" defaultValue={postId} />
         </Form>
       </CommandDialog>
     </>
