@@ -7,13 +7,22 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { BlogStory } from '@/types/blog';
+import { BlogPostStoryResponse, BlogStory } from '@/types/blog';
 import { FileText } from 'lucide-react';
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import Form from 'next/form';
+import { createStory } from '@/app/blog/actions';
+import { Input } from '@/components/ui/input';
+
+const initialState: BlogPostStoryResponse = {
+  success: false,
+  message: '',
+};
 
 export default function Story({ stories }: { stories: BlogStory[] }) {
   const [open, setOpen] = useState(false);
+  const [state, action, pending] = useActionState(createStory, initialState);
 
   const click = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -36,8 +45,17 @@ export default function Story({ stories }: { stories: BlogStory[] }) {
           <CommandSeparator />
           <CommandGroup heading="Actions"></CommandGroup>
         </CommandList>
-        <CommandInput placeholder="New Story Title" />
-        <Button>Create</Button>
+        <Form action={action}>
+          <Input
+            id="title"
+            placeholder="New Story Title"
+            name="title"
+            defaultValue={state?.payload?.title}
+          />
+          <Button type="submit" className="w-full">
+            {pending ? 'Creating...' : 'Create'}
+          </Button>
+        </Form>
       </CommandDialog>
     </>
   );

@@ -56,7 +56,6 @@ export const columns: ColumnDef<Post>[] = [
     header: () => <div>Author</div>,
     cell: ({ row }) => {
       const author = row.getValue('author') as User;
-
       return (
         <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600">
           <BadgeCheckIcon /> {author.username}

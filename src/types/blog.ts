@@ -4,7 +4,7 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
-  summary: string | null;
+  summary: string;
   tags: string[];
   authorId: number;
   author: User;

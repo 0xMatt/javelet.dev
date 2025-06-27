@@ -18,7 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useActionState } from 'react';
 import { createPost } from '@/app/blog/actions';
-import { BlogPostActionResponse, BlogPostBasicData } from '@/types/blog';
+import { BlogPostActionResponse, Post } from '@/types/blog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -27,7 +27,7 @@ const initialState: BlogPostActionResponse = {
   message: '',
 };
 
-export default function PostDrawer({ item }: { item?: BlogPostBasicData }) {
+export default function PostDrawer({ item }: { item?: Post }) {
   const [state, action, pending] = useActionState(createPost, initialState);
 
   const isMobile = useIsMobile();
