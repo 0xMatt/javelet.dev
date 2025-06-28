@@ -12,20 +12,58 @@ import { getSession } from '@/lib/session';
 import Header from '@/components/providers/header';
 import { Session } from '@/components/providers/session';
 
+const meta = {
+  title: 'Matthew Javelet',
+  description:
+    "Matthew Javelet's website for sharing programming stats, cataloging my ramblings and displaying personal and professional details.",
+  url: new URL(process.env.APP_URL || ''),
+};
+
 export const metadata: Metadata = {
+  metadataBase: meta.url,
   title: {
-    template: '%s | Matthew Javelet',
-    default: 'Matthew Javelet',
+    template: '%s | ' + meta.title,
+    default: meta.title,
   },
   authors: [
     {
-      name: 'Matthew Javelet',
-      url: 'https://www.javelet.work',
+      name: meta.title,
+      url: meta.url,
     },
   ],
-  description:
-    "Matthew Javelet's website for sharing programming stats, cataloging my ramblings and displaying personal and professional details.",
-  metadataBase: new URL(process.env.APP_URL || ''),
+  creator: meta.title,
+  description: meta.description,
+  keywords: [
+    'Matthew Javelet',
+    'Javelet',
+    'Fyuze',
+    'NextJs',
+    'Typescript',
+    'React',
+    'shadcn-ui',
+    'blog',
+    'tailwindcss',
+    'resume',
+    'Software Engineer',
+    'Software Developer',
+  ],
+  openGraph: {
+    url: meta.url,
+    type: 'website',
+    title: meta.title,
+    description: meta.description,
+    images: [
+      {
+        url: 'https://raw.githubusercontent.com/0xMatt/javelet.work/refs/heads/master/public/me.jpg',
+        width: 1200,
+        height: 630,
+        alt: meta.title,
+      },
+    ],
+  },
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
