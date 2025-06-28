@@ -9,6 +9,6 @@ export async function updateViews(slug: string) {
       data: { views: { increment: 1 } },
     });
   } catch (error) {
-    console.error('/api/[slug]/updateViews', error);
+    console.error('/api/[id]/updateViews', error);
   }
 }

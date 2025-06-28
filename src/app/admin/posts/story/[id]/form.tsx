@@ -19,7 +19,7 @@ export default function StoryForm({ story }: { story: Story }) {
   const [state, action, pending] = useActionState(updateStory, initialState);
   return (
     <>
-      <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
+      <div className="flex w-3xl flex-col gap-4 overflow-x-auto px-4 text-sm">
         <Form className="flex flex-col gap-4" action={action} id="form">
           <div className="flex flex-col gap-3">
             <Label htmlFor="title">Title</Label>

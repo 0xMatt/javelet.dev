@@ -12,7 +12,14 @@ export default async function Page() {
   }
 
   const data = await prisma.post.findMany({
-    include: { author: true, stories: true },
+    include: {
+      author: true,
+      stories: {
+        orderBy: {
+          id: 'asc',
+        },
+      },
+    },
   });
 
   return (

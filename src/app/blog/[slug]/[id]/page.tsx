@@ -1,45 +1,35 @@
 import prisma from '@/services/prisma';
 import { notFound } from 'next/navigation';
-import { Post } from '@/types/blog';
+import { Story } from '@/types/blog';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import remarkRehype from 'remark-rehype';
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post: Post = (await prisma.post.findUnique({
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const formatId: number = +id;
+  const story: Story = (await prisma.story.findUnique({
     where: {
-      slug: slug,
-      publishedAt: {
-        lte: new Date(),
-      },
+      id: formatId,
     },
-    include: {
-      author: true,
-      stories: {
-        orderBy: {
-          id: 'asc',
-        },
-      },
-    },
-  })) as Post;
+  })) as Story;
 
-  if (!post) {
+  if (!story) {
     notFound();
   }
 
   const markdown = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeSanitize)
-    .use(rehypeStringify)
+    .use(remarkParse) // Convert into markdown AST
+    .use(remarkRehype) // Transform to HTML AST
+    .use(rehypeSanitize) // Sanitize HTML input
+    .use(rehypeStringify) // Convert AST into serialized HTML
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
-    .process(post.stories[0].content as string);
+    .process(story.content as string);
 
   return (
     <article

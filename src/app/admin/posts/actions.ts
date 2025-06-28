@@ -163,7 +163,7 @@ export async function createStory(
 }
 
 const storyUpdateSchema = z.object({
-  title: z.string().min(5, 'Title is required and must be at least 5 characters.'),
+  title: z.string().min(3, 'Title is required and must be at least 5 characters.'),
   content: z.string().min(5, 'Content is required and must be at least 5 characters.'),
   id: z.string(),
 });
