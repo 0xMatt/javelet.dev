@@ -39,7 +39,7 @@ export default async function Page() {
               >
                 <div className="max-w-3xs sm:shrink-0">
                   <Image
-                    src="https://placehold.co/600x400"
+                    src="https://placehold.co/600x400.png"
                     width={600}
                     height={400}
                     alt="Placeholder image"

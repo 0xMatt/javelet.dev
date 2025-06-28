@@ -8,9 +8,8 @@ import { cn } from '@/lib/utils';
 export default function Publish({ post }: { post: Post }) {
   const [data, setData] = useState(post);
 
-  const toggle = () => {
-    const response = togglePublish(post);
-    response.then(setData);
+  const toggle = (data: Post) => {
+    togglePublish(data).then(setData);
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Publish({ post }: { post: Post }) {
         'cursor-pointer',
         data.publishedAt ? 'bg-blue-500 dark:bg-blue-600' : 'bg-red-500 dark:bg-red-600',
       )}
-      onClick={toggle}
+      onClick={() => toggle(data)}
     >
       {data.publishedAt !== null ? (
         <>
