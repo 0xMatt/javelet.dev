@@ -23,16 +23,13 @@ import PostStoriesList from '@/app/blog/[...slug]/stories';
 import StoryRenderer from '@/app/blog/[...slug]/story-renderer';
 import TocNavigation from '@/app/blog/[...slug]/toc-nav';
 import { getRelativeDate } from '@/lib/utils';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const { slug } = await params;
   const postSlug = slug[0];
@@ -104,7 +101,7 @@ export default async function Page({ params }: Props) {
     author: [
       {
         '@type': 'Person',
-        name: post.author.name,
+        name: post.author.username,
         url: process.env.APP_URL,
       },
     ],
@@ -143,7 +140,7 @@ export default async function Page({ params }: Props) {
                     className="decoration-muted-foreground hover:decoration-foreground text-foreground inline-flex underline underline-offset-[3px] transition-colors duration-300 ease-in-out"
                   >
                     <UserCircle size={16} className={'mt-0.5 mr-2'} />
-                    {post.author.name}
+                    {post.author.username}
                   </a>
                 </div>
                 <div className="flex w-full items-center justify-center gap-2 py-2 sm:w-fit sm:px-2 sm:py-0 first:sm:pl-0 last:sm:pr-0">
