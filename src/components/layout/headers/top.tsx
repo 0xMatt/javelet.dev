@@ -13,7 +13,7 @@ export default function HeaderTop({ children }: { children: React.ReactNode }) {
             <div className="md:hidden">
               <NavigationSheet />
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex max-w-lg items-center gap-4 overflow-y-auto">
               <TopMenu className="hidden md:block" />
             </div>
             <div className="flex items-center gap-3">
@@ -22,9 +22,7 @@ export default function HeaderTop({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </header>
-        <main className="bg-white dark:bg-zinc-950">
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
-        </main>
+        <main className="block bg-white dark:bg-zinc-950">{children}</main>
       </div>
     </>
   );

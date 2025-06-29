@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "studio": "prisma studio",
-    "postinstall": "prisma generate --no-engine",
+    "preinstall": "prisma generate --no-engine",
     "test": "jest"
   },
   "dependencies": {

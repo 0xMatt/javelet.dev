@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import '../../node_modules/@mdxeditor/editor/dist/style.css';
-
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:is(.dark *));
 
@@ -16,7 +15,6 @@
 .prose strong {
     font-weight: 600;
 }
-
 
 :root {
     /*--radius: 0.65rem;*/

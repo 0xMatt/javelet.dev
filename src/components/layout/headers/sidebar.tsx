@@ -17,8 +17,17 @@ export function HeaderSiderbar({ children }: { children: React.ReactNode }) {
           </div>
           <NextBreadcrumb />
           <div className="mr-5 ml-auto flex items-center gap-2">
-            <Link href="https://github.com/0xMatt/javelet.dev" target="_blank">
-              <Button size="sm" className="cursor-pointer">
+            <Link
+              href="https://github.com/0xMatt/javelet.dev"
+              target="_blank"
+              aria-label="Browse the source code on GitHub"
+            >
+              <Button
+                size="sm"
+                className="cursor-pointer"
+                role="button"
+                aria-label="Browse the source code on GitHub"
+              >
                 <Github />
               </Button>
             </Link>

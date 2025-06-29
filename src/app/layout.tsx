@@ -1,7 +1,6 @@
 import { ThemeProvider } from 'next-themes';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
-import { FlickeringGrid } from '@/components/magicui/flickering-grid';
 import { Metadata } from 'next';
 import '@/styles/global.css';
 import '@mdxeditor/editor/style.css';
@@ -62,7 +61,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: '/',
+    canonical: meta.url,
   },
 };
 
@@ -72,14 +71,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="relative min-h-full">
-        <FlickeringGrid
-          className="absolute z-0 hidden size-full min-h-full lg:block"
-          squareSize={4}
-          gridGap={10}
-          color="#6B7280"
-          maxOpacity={0.5}
-          flickerChance={0.1}
-        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Session sessionPromise={session}>
             <div className="flex-1 bg-white dark:bg-black">
