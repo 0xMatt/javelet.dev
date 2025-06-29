@@ -12,7 +12,7 @@ import { NavigationMenuProps } from '@radix-ui/react-navigation-menu';
 export default function TopMenu(props: NavigationMenuProps) {
   return (
     <NavigationMenu className="hidden md:block" {...props}>
-      <NavigationMenuList className="gap-4 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
+      <NavigationMenuList className="gap-4 space-x-0 overflow-x-hidden data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
         {MENU_ITEMS?.map((subItem) => (
           <NavigationMenuItem key={subItem.title}>
             <NavigationMenuLink asChild>

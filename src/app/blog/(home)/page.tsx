@@ -2,19 +2,24 @@ import PageHeader from '@/components/elements/page-header';
 import { Metadata } from 'next';
 import prisma from '@/services/prisma';
 import { Badge } from '@/components/ui/badge';
-import { Hash } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { Eye, FileText, Hash, UserCircle, WholeWord } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Post } from '@/types/blog';
+import { getReadingTime } from '@/lib/reading-time';
+import { getRelativeDate } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'A vast library of the most engaging literature you will ever find',
 };
 
+interface PostWithWpm extends Post {
+  wpm: number;
+}
+
 export default async function Page() {
-  const posts: Post[] = await prisma.post.findMany({
+  const posts: PostWithWpm[] = (await prisma.post.findMany({
     where: {
       publishedAt: {
         lte: new Date(),
@@ -24,6 +29,12 @@ export default async function Page() {
       author: true,
       stories: true,
     },
+  })) as PostWithWpm[];
+
+  posts.map((post) => {
+    post.wpm = post.stories
+      .map((story) => getReadingTime(story.content as string).minutes)
+      .reduce((accumulator, value): number => value + accumulator, 0);
   });
 
   return (
@@ -43,22 +54,30 @@ export default async function Page() {
                     width={600}
                     height={400}
                     alt="Placeholder image"
+                    priority={true}
                   />
                 </div>
                 <div className="grow">
                   <h3 className="mb-2 text-lg leading-6 font-medium">{post.title}</h3>
                   <p className="text-muted-foreground mb-2 text-sm">{post.summary}</p>
-                  <p className="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-sm">
-                    <div>Matt</div>
-                    <Separator orientation="vertical" />
-                    <div>Date</div>
-                    <Separator orientation="vertical" />
-                    <div>WPM</div>
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="bg-primary h-4 w-4 rounded-full"></div>
-                      <div>100</div>
+                  <div className="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-sm">
+                    <span className="inline-flex">
+                      <UserCircle size={16} className="mt-0.5 mr-1" />
+                      {post.author.name}
+                    </span>
+                    <span className="inline-flex">
+                      <FileText size={16} className="mt-0.5 mr-1" />
+                      {getRelativeDate(post.createdAt)}
+                    </span>
+                    <span className="inline-flex">
+                      <WholeWord size={16} className="mt-0.5 mr-1" />
+                      {post.wpm} min read
+                    </span>
+                  </div>
+                  <div className="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-sm">
+                    <div className="inline-flex">
+                      <Eye size={16} className="mt-0.5 mr-1" />
+                      {post.views} Views
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 pt-2">
