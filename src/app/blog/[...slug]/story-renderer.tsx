@@ -1,6 +1,3 @@
-import prisma from '@/services/prisma';
-import { notFound } from 'next/navigation';
-import { Post } from '@/types/blog';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import rehypeSanitize from 'rehype-sanitize';
@@ -8,27 +5,11 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkRehype from 'remark-rehype';
+import { Story } from '@/types/blog';
+import { notFound } from 'next/navigation';
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post: Post = (await prisma.post.findUnique({
-    where: {
-      slug: slug,
-      publishedAt: {
-        lte: new Date(),
-      },
-    },
-    include: {
-      author: true,
-      stories: {
-        orderBy: {
-          id: 'asc',
-        },
-      },
-    },
-  })) as Post;
-
-  if (!post) {
+export default async function StoryRenderer({ story }: { story: Story }) {
+  if (!story) {
     notFound();
   }
 
@@ -39,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     .use(rehypeStringify)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
-    .process(post.stories[0].content as string);
+    .process(story.content as string);
 
   return (
     <article
