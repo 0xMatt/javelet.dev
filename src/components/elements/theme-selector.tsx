@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronsUpDown, Moon, Sun } from 'lucide-react';
+import { ChevronsUpDown, Computer, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import {
   DropdownMenu,
@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenuButton } from '@/components/ui/sidebar';
-import SystemIcon from 'next/dist/client/components/react-dev-overlay/ui/icons/system-icon';
 import { Button } from '@/components/ui/button';
 
 export function ThemeSelector({
@@ -58,7 +57,7 @@ export function ThemeSelector({
       >
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => setTheme('system')}>
-            <SystemIcon />
+            <Computer />
             System
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme('dark')}>

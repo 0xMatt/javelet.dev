@@ -3,7 +3,6 @@
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { ChartColumnIncreasing } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
-import { BorderBeam } from '@/components/magicui/border-beam';
 
 interface StatProgressCardProps {
   name: string;
@@ -41,29 +40,17 @@ export default function StatProgressCard({
               index: number,
             ) => (
               <div key={index}>
-                {language.name} {language.percent}%
+                {language.name} - {language.percent}%
                 <Progress
                   key={index}
                   value={language.percent}
-                  className={
-                    'w-[' +
-                    language.percent +
-                    '%] h-4 [&>div]:bg-emerald-500 dark:[&>div]:bg-emerald-500'
-                  }
+                  className="[&>div]:bg-emerald-500 dark:[&>div]:bg-emerald-500"
                 />
               </div>
             ),
           )}
         </CardContent>
       </CardHeader>
-      {colors.map((color, index: number) => (
-        <BorderBeam
-          key={index}
-          duration={40}
-          size={500}
-          className={`from-transparent via-${color}-500 to-transparent`}
-        />
-      ))}
     </Card>
   );
 }

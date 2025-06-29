@@ -8,6 +8,9 @@ import { getContributions } from '@/services/github';
 import Calendar from '@/app/stats/_components/calendar';
 import Contributions from '@/app/stats/_components/contributions';
 import StatProgressCard from '@/app/stats/_components/stat-progress-card';
+import prisma from '@/services/prisma';
+import Sessions from '@/app/stats/_components/online';
+import { SessionType } from '@/types/session';
 
 export const metadata: Metadata = {
   title: 'Stats',
@@ -22,12 +25,24 @@ export default async function Page() {
 
   const wakatime = await data.wakatime.json();
   const github = await data.github.json();
+  const date = new Date();
+  date.setMinutes(date.getMinutes() - 30);
+
+  const sessions: SessionType[] = (await prisma.session.findMany({
+    where: {
+      lastClick: {
+        gte: date,
+      },
+    },
+    include: { user: true },
+  })) as SessionType[];
 
   const contributionCalendar = github.data.user.contributionsCollection?.contributionCalendar;
 
   return (
     <>
       <PageHeader header={metadata.title?.toString()} description={metadata.description} />
+      <Sessions sessions={sessions} />
       <SectionTitle
         title="WakaTime"
         link={{ text: '0xMatt', href: 'https://wakatime.com/@0xMatt', target: '_blank' }}

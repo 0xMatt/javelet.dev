@@ -24,14 +24,3 @@ export const RegisterFormSchema = z
     message: "Passwords don't match",
     path: ['password2'],
   });
-
-export type FormState =
-  | {
-      errors?: {
-        username?: string[];
-        email?: string[];
-        password?: string[];
-      };
-      message?: string;
-    }
-  | undefined;

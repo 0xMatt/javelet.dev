@@ -24,7 +24,7 @@ export default function Github() {
           {data.data.user.contributionsCollection.contributionCalendar.totalContributions}{' '}
           contributions
         </CardTitle>
-        <div className="line-clamp-1 flex gap-2 font-medium">
+        <div className="flex flex-wrap gap-2 font-medium">
           {['open source', new Date().getFullYear()].map((tag) => (
             <Badge variant="outline" key={tag}>
               <Hash />
