@@ -21,7 +21,7 @@ export default function Weather() {
           <span className={'text-sm'}>Weather</span>
         </CardDescription>
         <CardTitle className="text-lg">{data.main.temp + '\u2109'}</CardTitle>
-        <div className="line-clamp-1 flex gap-2 font-medium">
+        <div className="flex gap-2 font-medium">
           {data.weather
             .concat([{ description: 'meteors' }])
             .map((tag: { description: string; icon: string }) => (

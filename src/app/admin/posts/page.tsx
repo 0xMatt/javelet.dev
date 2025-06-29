@@ -4,6 +4,7 @@ import prisma from '@/services/prisma';
 import { getSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
 import PostDrawer from '@/app/admin/posts/post';
+import { Post } from '@/types/blog';
 
 export default async function Page() {
   const session = await getSession();
@@ -11,7 +12,7 @@ export default async function Page() {
     return redirect('/');
   }
 
-  const data = await prisma.post.findMany({
+  const data = (await prisma.post.findMany({
     include: {
       author: true,
       stories: {
@@ -20,7 +21,7 @@ export default async function Page() {
         },
       },
     },
-  });
+  })) as Post[];
 
   return (
     <div className="container mx-auto pb-10">

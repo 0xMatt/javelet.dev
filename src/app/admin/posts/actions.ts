@@ -213,7 +213,7 @@ export async function updateStory(
 }
 
 export async function togglePublish(post: Post): Promise<Post> {
-  const data = await prisma.post.update({
+  return (await prisma.post.update({
     where: {
       slug: post.slug,
     },
@@ -224,6 +224,5 @@ export async function togglePublish(post: Post): Promise<Post> {
     data: {
       publishedAt: post.publishedAt ? null : new Date(),
     },
-  });
-  return data;
+  })) as Post;
 }

@@ -14,6 +14,7 @@ model User {
   createdAt DateTime  @default(now())
   email     String    @unique @db.VarChar(240)
   username  String    @db.VarChar(30)
+  name      String?   @db.VarChar(80)
   password  String    @db.VarChar(60)
   isAdmin   Boolean   @default(false)
   sessions  Session[]

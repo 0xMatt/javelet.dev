@@ -35,16 +35,16 @@ export async function getSession(): Promise<SessionType | undefined | null> {
   }
 
   try {
-    return prisma.session.findFirst({
+    return (await prisma.session.findFirst({
       where: {
         sid: sessionCookie,
       },
       include: {
         user: true,
       },
-    });
+    })) as SessionType;
   } catch (error) {
-    console.error(error);
+    console.log(error);
     return;
   }
 }
@@ -65,7 +65,9 @@ export async function addUserToSession(userId: number) {
 }
 
 export async function createSession() {
-  const { browser, os, device, isBot, engine } = userAgent({ headers: await headers() });
+  const headersList = await headers();
+  const ip = headersList.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+  const { browser, os, device, isBot, engine } = userAgent({ headers: headersList });
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const sid = await encrypt({ id: Math.random(), expiresAt });
 
@@ -78,7 +80,7 @@ export async function createSession() {
       engine: engine.name as string,
       expiresAt: expiresAt,
       location: '',
-      ip: '',
+      ip: ip,
       isBot,
     },
   });
@@ -96,7 +98,7 @@ export async function createSession() {
   return session;
 }
 
-export async function updateSession() {
+export async function updateSession(pathname: string) {
   let session = await getSession();
   if (!session) {
     session = await createSession();
@@ -107,34 +109,33 @@ export async function updateSession() {
     return null;
   }
 
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const headersList = await headers();
+  const ip = headersList.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+  const { browser, os, device, isBot, engine } = userAgent({ headers: headersList });
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  await prisma.session.update({
+    where: {
+      sid: session.sid,
+    },
+    data: {
+      device: device.type || 'unknown',
+      browser: browser.name as string,
+      os: os.name as string,
+      engine: engine.name as string,
+      expiresAt: expiresAt,
+      lastClick: new Date(),
+      location: pathname,
+      ip: ip,
+      isBot,
+    },
+  });
 
   const cookieStore = await cookies();
   cookieStore.set('session', session.sid, {
     httpOnly: true,
     secure: true,
-    expires: expires,
-    sameSite: 'lax',
-    path: '/',
-  });
-}
-
-export async function updateSessionOld() {
-  const session = (await cookies()).get('session')?.value;
-
-  const payload = await decrypt(session);
-
-  if (!session || !payload) {
-    return null;
-  }
-
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-  const cookieStore = await cookies();
-  cookieStore.set('session', session, {
-    httpOnly: true,
-    secure: true,
-    expires: expires,
+    expires: expiresAt,
     sameSite: 'lax',
     path: '/',
   });

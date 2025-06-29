@@ -106,7 +106,7 @@ export default function LoginForm() {
                         defaultValue={state.payload?.password || ''}
                         className="border-0 shadow-none focus-visible:ring-0"
                       />
-                      <button onClick={togglePasswordVisibility}>
+                      <button onClick={togglePasswordVisibility} tabIndex={-1}>
                         {showPassword ? (
                           <EyeOffIcon className="text-muted-foreground h-5 w-5" />
                         ) : (
