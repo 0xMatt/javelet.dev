@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/lib/session';
 
 export default async function middleware(request: NextRequest) {
-  await updateSession(request.nextUrl.pathname);
+  if (
+    !request.nextUrl.pathname.includes('robots') &&
+    !request.nextUrl.pathname.includes('sitemap') &&
+    !request.nextUrl.pathname.includes('.well-known')
+  ) {
+    await updateSession(request.nextUrl.pathname);
+  }
   return NextResponse.next();
 }
 
