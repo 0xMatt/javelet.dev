@@ -12,9 +12,9 @@ import Header from '@/components/providers/header';
 import { Session } from '@/components/providers/session';
 
 const meta = {
-  title: 'Matthew Javelet',
+  title: 'The digital repository of Matthew Javelet',
   description:
-    "Matthew Javelet's website for sharing programming stats, cataloging my ramblings and displaying personal and professional details.",
+    "Matthew Javelet's website for sharing programming stats, hand written articles and displaying personal and professional details.",
   url: new URL(process.env.APP_URL || ''),
 };
 

@@ -20,13 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const data = {
-    wakatime: await getSummaries(),
-    github: await getContributions(),
-  };
-
-  const wakatime = await data.wakatime.json();
-  const github = await data.github.json();
+  const wakatime = await getSummaries();
+  const github = await getContributions();
   const date = new Date();
   date.setMinutes(date.getMinutes() - 30);
 

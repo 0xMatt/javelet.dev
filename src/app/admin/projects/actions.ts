@@ -90,7 +90,6 @@ export async function saveProject(
 }
 
 export async function deleteProject(id: number) {
-  console.log('deleting project:', id);
   await prisma.project.delete({
     where: { id },
   });
