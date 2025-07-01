@@ -1,3 +1,5 @@
+'use cache';
+
 import { notFound } from 'next/navigation';
 import { Post, Story } from '@/types/blog';
 import prisma from '@/services/prisma';

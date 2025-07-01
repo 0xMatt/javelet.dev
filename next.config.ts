@@ -27,7 +27,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react'],
     viewTransition: true,
     nodeMiddleware: true,
+    useCache: true,
   },
 };
 
-export default withBundleAnalyzer(withMDX(nextConfig));
+export default withBundleAnalyzer(nextConfig);
