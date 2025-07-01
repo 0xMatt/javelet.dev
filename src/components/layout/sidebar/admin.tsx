@@ -21,6 +21,10 @@ export function AdminMenu({ ...props }: {} & React.ComponentPropsWithoutRef<type
       title: 'Posts',
       url: '/admin/posts',
     },
+    {
+      title: 'Projects',
+      url: '/admin/projects',
+    },
   ];
 
   if (!session?.user?.isAdmin) {

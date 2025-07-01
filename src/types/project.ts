@@ -1,4 +1,4 @@
-export interface ProjectItem {
+export interface Project {
   id: number;
   name: string;
   slug: string;
@@ -14,13 +14,14 @@ export interface Tech {
   id: number;
   name: string;
   projectId: number;
-  project: ProjectItem;
+  project: Project;
   url?: string;
   code?: string;
 }
 
 export interface ProjectFormData {
   name: string;
+  slug?: string;
   summary: string;
   repository: string;
   website: string;
