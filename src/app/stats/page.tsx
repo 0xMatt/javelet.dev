@@ -29,6 +29,7 @@ export default async function Page() {
   date.setMinutes(date.getMinutes() - 30);
 
   const sessions: SessionType[] = (await prisma.session.findMany({
+    distinct: ['ip'],
     where: {
       lastClick: {
         gte: date,
@@ -37,12 +38,16 @@ export default async function Page() {
     include: { user: true },
   })) as SessionType[];
 
+  const visitors = await prisma.session.groupBy({
+    by: ['ip'],
+  });
+
   const contributionCalendar = github.data.user.contributionsCollection?.contributionCalendar;
 
   return (
     <>
       <PageHeader header={metadata.title?.toString()} description={metadata.description} />
-      <Sessions sessions={sessions} />
+      <Sessions sessions={sessions} visitors={visitors} />
       <SectionTitle
         title="WakaTime"
         link={{ text: '0xMatt', href: 'https://wakatime.com/@0xMatt', target: '_blank' }}

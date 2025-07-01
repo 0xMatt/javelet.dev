@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface CalendarProps {
   data: {
@@ -43,36 +44,38 @@ export default function Calendar({ data }: CalendarProps) {
 
   return (
     <>
-      <div className="relative flex flex-col overflow-hidden">
-        <ul className="flex justify-end gap-[3px] overflow-hidden text-xs md:justify-start dark:text-neutral-400">
-          {months.map((month) => (
-            <li
-              key={month.firstDay}
-              className={cn(`${month.totalWeeks < 2 ? 'invisible' : ''}`, 'm-0 p-0')}
-              style={{ minWidth: 14.3 * month.totalWeeks }}
-            >
-              {month.name}
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-start gap-[3px] overflow-hidden">
-          {weeks?.map((week) => (
-            <div key={week.firstDay}>
-              {week.contributionDays.map((contribution, index) => {
-                const backgroundColor = contribution.contributionCount > 0 && contribution.color;
+      <ScrollArea>
+        <div className="relative flex flex-col">
+          <ul className="flex justify-end gap-[3px] text-xs lg:justify-between dark:text-neutral-400">
+            {months.map((month) => (
+              <li
+                key={month.firstDay}
+                className={cn(`${month.totalWeeks < 2 ? 'invisible' : ''}`, 'm-0 p-0')}
+                style={{ minWidth: 14.3 * month.totalWeeks }}
+              >
+                {month.name}
+              </li>
+            ))}
+          </ul>
+          <div className="flex justify-end gap-[3px] lg:justify-between">
+            {weeks?.map((week) => (
+              <div key={week.firstDay}>
+                {week.contributionDays.map((contribution, index) => {
+                  const backgroundColor = contribution.contributionCount > 0 && contribution.color;
 
-                return (
-                  <span
-                    key={index}
-                    className="my-[2px] block h-[12px] w-[12px] rounded-sm bg-neutral-300 dark:bg-neutral-800"
-                    style={backgroundColor ? { backgroundColor } : undefined}
-                  />
-                );
-              })}
-            </div>
-          ))}
+                  return (
+                    <span
+                      key={index}
+                      className="my-[2px] block h-[12px] w-[12px] rounded-sm bg-neutral-300 dark:bg-neutral-800"
+                      style={backgroundColor ? { backgroundColor } : undefined}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </ScrollArea>
     </>
   );
 }
