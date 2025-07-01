@@ -1,5 +1,3 @@
-'use cache';
-
 import { columns } from './columns';
 import { DataTable } from './data-table';
 import prisma from '@/services/prisma';

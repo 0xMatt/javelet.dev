@@ -29,6 +29,7 @@ const NextBreadcrumb = () => {
               aria-label="Navigate to homepage"
             >
               <Home size={18} className="inline" />
+              Home
             </BreadcrumbLink>
           </BreadcrumbItem>
           {pathNames.length > 0}
@@ -48,12 +49,15 @@ const NextBreadcrumb = () => {
                 <ChevronsRight size={14} className="mt-1 mr-2" />
                 <BreadcrumbItem>
                   {currentPage !== totalPages ? (
-                    <BreadcrumbLink href={href} className="mt-0.5 inline-flex gap-2">
-                      <page.icon size={18} className="mt-1 inline" />
+                    <BreadcrumbLink
+                      href={href}
+                      className="inline-flex items-center justify-center gap-2"
+                    >
+                      <page.icon size={18} className="inline" />
                       <span>{itemLink}</span>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="mt-0.5 inline-flex gap-2">
+                    <BreadcrumbPage className="inline-flex items-center justify-center gap-2">
                       <page.icon size={18} className="inline" />
                       <span>{itemLink}</span>
                     </BreadcrumbPage>

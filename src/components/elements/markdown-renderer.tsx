@@ -20,7 +20,7 @@ export default async function MarkdownRenderer({ content }: { content: string })
 
   return (
     <article
-      className="prose col-start-2 max-w-none text-white"
+      className="prose prose-zinc col-start-2 max-w-none text-white"
       dangerouslySetInnerHTML={{
         __html: String(markdown),
       }}

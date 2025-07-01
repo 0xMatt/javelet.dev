@@ -5,10 +5,20 @@
 @custom-variant dark (&:is(.dark *));
 
 .prose {
-    color: #fff;
+    color: #bfbfbf;
     font-family: "Source Code Pro", monospace;
-    h1, h2, h3, h4, h5, h6, p, ul, li, ol, p, blockquote, pre, strong, sub, sup, tt, var, a{
-        color: #fff;
+    h1, h2, h3, h4, h5, h6, p, ul, li, ol, p, blockquote, pre, strong, sub, sup, tt, var, a, dd, dt, th, td, tr{
+        color: #bfbfbf;
+    }
+    code {
+        background: #ccc;
+        color: #333;
+    }
+    pre {
+        code {
+        background: inherit;
+        color: #bfbfbf;
+    }
     }
 }
 

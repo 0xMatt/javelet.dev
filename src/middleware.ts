@@ -5,6 +5,7 @@ export default async function middleware(request: NextRequest) {
   if (
     !request.nextUrl.pathname.includes('robots') &&
     !request.nextUrl.pathname.includes('sitemap') &&
+    !request.nextUrl.pathname.includes('api') &&
     !request.nextUrl.pathname.includes('.well-known')
   ) {
     await updateSession(request.nextUrl.pathname);
