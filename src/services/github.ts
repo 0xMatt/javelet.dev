@@ -1,9 +1,12 @@
+import { GithubData } from '@/services/types';
+
 const githubConfig = {
   token: process.env.GITHUB_TOKEN,
   username: process.env.GITHUB_USERNAME,
 };
 
-export async function getContributions() {
+export async function getContributions(): Promise<GithubData> {
+  'use cache';
   const headers = {
     Authorization: `bearer ${githubConfig.token}`,
   };
@@ -35,9 +38,10 @@ export async function getContributions() {
             }
           }`,
   };
-  return await fetch('https://api.github.com/graphql', {
+  const data = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: headers,
   });
+  return data.json();
 }

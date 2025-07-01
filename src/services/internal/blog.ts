@@ -1,4 +1,18 @@
 import prisma from '@/services/prisma';
+import { Post } from '@/types/blog';
+
+export async function getPosts(): Promise<Post[]> {
+  return prisma.post.findMany({
+    where: {
+      publishedAt: {
+        lte: new Date(),
+      },
+    },
+    include: {
+      author: true,
+    },
+  }) as Promise<Post[]>;
+}
 
 export async function updateViews(slug: string) {
   try {

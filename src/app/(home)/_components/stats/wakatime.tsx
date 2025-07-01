@@ -1,21 +1,10 @@
-'use client';
-
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Clock, Hash } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
 import DotPattern from '@/components/ui/dot-pattern';
-import { ShineBorder } from '@/components/magicui/shine-border';
-import { useTheme } from 'next-themes';
-import CardSkeleton from '@/components/elements/card-skeleton';
+import { WakaTimeData } from '@/services/types';
 
-export default function WakaTime() {
-  const theme = useTheme();
-
-  const { data } = useSWR(`/api/services/wakatime`, fetcher);
-  if (!data) return <CardSkeleton className="h-[130px]" />;
-
+export default function WakaTime({ data }: { data: WakaTimeData }) {
   const tags: string[] = ['programming', 'daily average'];
 
   return (
@@ -36,7 +25,6 @@ export default function WakaTime() {
           ))}
         </div>
       </CardHeader>
-      <ShineBorder shineColor={theme.theme === 'dark' ? 'white' : 'black'} />
     </Card>
   );
 }

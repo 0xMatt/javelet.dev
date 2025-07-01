@@ -1,17 +1,10 @@
-'use client';
-
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GithubIcon, Hash } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import useSWR from 'swr';
-import { fetcher } from '@/lib/fetcher';
-import CardSkeleton from '@/components/elements/card-skeleton';
 import { PlaceholderPattern } from '@/components/elements/placeholder-pattern';
+import { GithubData } from '@/services/types';
 
-export default function Github() {
-  const { data } = useSWR(`/api/services/github`, fetcher);
-  if (!data) return <CardSkeleton className="h-[130px]" />;
-
+export default function Github({ data }: { data: GithubData }) {
   return (
     <Card className="border-sidebar-border/90 dark:border-sidebar-border @container/card relative h-[130px] overflow-hidden transition-all duration-300 hover:scale-102">
       <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-500/20 dark:stroke-neutral-100/20" />

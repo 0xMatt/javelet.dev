@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 
 interface StatProgressCardProps {
   name: string;
-  limit: number;
+  limit?: number;
   percent: number;
 }
 
