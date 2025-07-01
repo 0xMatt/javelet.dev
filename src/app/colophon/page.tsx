@@ -11,7 +11,7 @@ export default function Page() {
     <>
       <h2>Tech Stack</h2>
       <p className="text-primary-foreground">
-        This website is created with{' '}
+        This website is created with
         <a
           href="#"
           className="text-foreground/70 hover:text-foreground/60 list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
@@ -40,11 +40,9 @@ export default function Page() {
           Source Code Pro Bold
         </p>
       </div>
-      <h2>Design & Colors</h2>
-      <h2>Logo</h2>
       <h2>Carbon Footprint</h2>
       <p>
-        This website produces less than 0.11g of CO2 per per visit, according to{' '}
+        This website produces less than 0.11g of CO2 per per visit, according to
         <a href="https://www.websitecarbon.com/website/javelet-work/" target="_blank">
           Website Carbon Calculator
         </a>

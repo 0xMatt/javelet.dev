@@ -1,9 +1,11 @@
+'use cache';
+
 import Intro from '@/app/(home)/_components/intro';
 import Stats from '@/app/(home)/_components/stats';
 import Posts from '@/app/(home)/_components/posts';
 import SectionTitle from '@/components/elements/section-title';
 
-export default function Page() {
+export default async function Page() {
   const personLd = {
     '@context': 'https://schema.org/',
     '@type': 'Person',
