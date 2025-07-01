@@ -1,5 +1,3 @@
-'use cache';
-
 import PageHeader from '@/components/elements/page-header';
 import { Metadata } from 'next';
 import SectionTitle from '@/components/elements/section-title';
