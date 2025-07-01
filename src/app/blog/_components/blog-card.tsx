@@ -1,17 +1,15 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, ChevronRight, Eye, Hash } from 'lucide-react';
+import { Calendar, Eye, Hash } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Post } from '@/types/blog';
-import { truncateText } from '@/lib/utils';
-import { DateTime } from 'luxon';
+import { getRelativeDate, truncateText } from '@/lib/utils';
 
 export default function BlogCard({ post: post }: { post: Post }) {
-  const createdAt =
-    DateTime.now()
-      .minus({ days: DateTime.now().diff(DateTime.fromISO(post.createdAt.toString())).as('days') })
-      .toRelative() || '';
+  /*  const wpm = post.stories
+    .map((story) => getReadingTime(story.content as string).minutes)
+    .reduce((accumulator, value): number => value + accumulator, 0);*/
+
   return (
     <Link href={`/blog/${post.slug}`}>
       <Card className="gap-2 overflow-hidden rounded-md p-0 shadow-none transition-all duration-300 hover:scale-102 dark:border-neutral-700">
@@ -27,7 +25,7 @@ export default function BlogCard({ post: post }: { post: Post }) {
           <div className="absolute right-2 bottom-2 line-clamp-1 flex gap-2 font-medium">
             <Badge variant="default">
               <Calendar />
-              {createdAt}
+              {getRelativeDate(new Date(post.createdAt))}
             </Badge>
             <Badge variant="default">
               <Eye />
@@ -43,11 +41,11 @@ export default function BlogCard({ post: post }: { post: Post }) {
             {truncateText(post.summary as string, 120)}
           </p>
         </CardContent>
-        <CardFooter className="relative h-[70px]">
+        {/*<CardFooter className="relative h-[70px]">
           <Button className="absolute bottom-0 left-0 m-0 w-full cursor-pointer p-0 shadow-none">
-            5 minute read <ChevronRight />
+            {wpm} minute read <ChevronRight />
           </Button>
-        </CardFooter>
+        </CardFooter>*/}
       </Card>
     </Link>
   );

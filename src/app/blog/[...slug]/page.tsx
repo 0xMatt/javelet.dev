@@ -22,10 +22,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import PostTableOfContents from '@/app/blog/[...slug]/toc';
 import PostStoriesList from '@/app/blog/[...slug]/stories';
-import StoryRenderer from '@/app/blog/[...slug]/story-renderer';
 import TocNavigation from '@/app/blog/[...slug]/toc-nav';
 import { getRelativeDate } from '@/lib/utils';
 import { Metadata } from 'next';
+import MarkdownRenderer from '@/components/elements/markdown-renderer';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -64,7 +64,7 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const postSlug = slug[0];
   const storyId = slug[1];
-  const currentSlug = slug.join('/');
+  const currentSlug = postSlug;
 
   const post: Post = (await prisma.post.findUnique({
     where: {
@@ -211,7 +211,7 @@ export default async function Page({ params }: Props) {
           <div className="sticky top-20 left-0 col-start-1 mr-0 hidden h-[calc(100vh-5rem)] w-full pr-5 lg:block">
             <PostTableOfContents slug={currentSlug} stories={post.stories} />
           </div>
-          <StoryRenderer story={story} />
+          <MarkdownRenderer content={story.content as string} />
           <div className="sticky top-20 col-start-3 hidden h-[calc(100vh-5rem)] w-full pl-2 lg:block">
             <PostStoriesList post={post} currentStory={story} stories={[...post.stories]} />
           </div>

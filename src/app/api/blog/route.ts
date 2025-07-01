@@ -10,7 +10,6 @@ export async function GET() {
       },
       include: {
         author: true,
-        stories: true,
       },
     }),
   );

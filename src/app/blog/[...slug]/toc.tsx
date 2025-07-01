@@ -35,7 +35,7 @@ export default function PostTableOfContents({ slug, stories }: { slug: string; s
               {getTableOfContents(story.content as string).map((item: Toc, index: number) => (
                 <Link
                   key={index}
-                  href={'/blog/' + slug + '#' + item.id}
+                  href={'/blog/' + slug + '/' + story.id + '#' + item.id}
                   className="hover:text-foreground/60 text-xs transition-colors duration-200"
                 >
                   {item.level > 1 && (

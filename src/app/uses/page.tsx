@@ -21,7 +21,7 @@ export default function Page() {
         oneisland theme and happy with experience.
       </p>
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="mb-15 grid w-full grid-cols-3 lg:mb-0">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="hardware">Hardware</TabsTrigger>
           <TabsTrigger value="software">Software</TabsTrigger>

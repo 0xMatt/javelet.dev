@@ -1,15 +1,10 @@
-'use client';
-
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Code } from 'lucide-react';
 import Particles from '@/components/ui/particles';
-import { useTheme } from 'next-themes';
 import { AnimatedSpan, TypingAnimation } from '@/components/magicui/terminal';
 
 const Intro = () => {
-  const { resolvedTheme } = useTheme();
-  const isLightTheme = resolvedTheme === 'light';
   const data = {
     description: 'Welcome to the digital repository of',
     name: 'Matthew Javelet',
@@ -28,13 +23,7 @@ const Intro = () => {
   return (
     <>
       <Card className="@container/card relative h-[220px] gap-0 transition-all duration-300 hover:scale-101 dark:border-neutral-500">
-        <Particles
-          className="absolute inset-0"
-          quantity={100}
-          ease={80}
-          color={isLightTheme ? '#000' : '#fff'}
-          refresh
-        />
+        <Particles className="absolute inset-0" quantity={100} ease={80} refresh />
         <CardHeader>
           <CardDescription>
             <TypingAnimation delay={0}>{data.description}</TypingAnimation>
