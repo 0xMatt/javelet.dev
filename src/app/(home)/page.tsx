@@ -3,7 +3,6 @@
 import Intro from '@/app/(home)/_components/intro';
 import Stats from '@/app/(home)/_components/stats';
 import SectionTitle from '@/components/elements/section-title';
-import { getPosts } from '@/services/internal/blog';
 import Posts from '@/app/(home)/_components/posts';
 
 export default async function Page() {
@@ -48,8 +47,6 @@ export default async function Page() {
     mainEntity: personLd,
   };
 
-  const posts = await getPosts();
-
   return (
     <>
       <script
@@ -62,7 +59,7 @@ export default async function Page() {
       <SectionTitle title="Stats on Stacks" link={{ text: 'More Stats', href: 'stats' }} />
       <Stats />
       <SectionTitle title="Posts" link={{ text: 'View All', href: 'blog' }} />
-      <Posts posts={posts} />
+      <Posts />
     </>
   );
 }
