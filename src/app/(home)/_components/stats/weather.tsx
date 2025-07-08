@@ -1,10 +1,16 @@
+'use client';
+
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cloud, Hash } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Meteors } from '@/components/magicui/meteors';
-import { WeatherData } from '@/services/types';
+import useSWR from 'swr';
+import { fetcher } from '@/lib/fetcher';
+import CardSkeleton from '@/components/elements/card-skeleton';
 
-export default function Weather({ data }: { data: WeatherData }) {
+export default function Weather() {
+  const { data } = useSWR(`/api/services/open-weather`, fetcher);
+  if (!data) return <CardSkeleton className="h-[130px]" />;
   return (
     <Card className="border-sidebar-border/90 dark:border-sidebar-border @container/card relative h-[130px] overflow-hidden transition-all duration-300 hover:scale-102">
       <Meteors number={50} />

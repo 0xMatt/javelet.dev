@@ -3,9 +3,6 @@
 import Intro from '@/app/(home)/_components/intro';
 import Stats from '@/app/(home)/_components/stats';
 import SectionTitle from '@/components/elements/section-title';
-import { getSummaries } from '@/services/wakatime';
-import { getContributions } from '@/services/github';
-import { getCurrentForecast } from '@/services/open-weather';
 import { getPosts } from '@/services/internal/blog';
 import Posts from '@/app/(home)/_components/posts';
 
@@ -51,9 +48,6 @@ export default async function Page() {
     mainEntity: personLd,
   };
 
-  const wakatime = await getSummaries();
-  const github = await getContributions();
-  const weather = await getCurrentForecast();
   const posts = await getPosts();
 
   return (
@@ -66,7 +60,7 @@ export default async function Page() {
       />
       <Intro />
       <SectionTitle title="Stats on Stacks" link={{ text: 'More Stats', href: 'stats' }} />
-      <Stats wakatime={wakatime} github={github} weather={weather} />
+      <Stats />
       <SectionTitle title="Posts" link={{ text: 'View All', href: 'blog' }} />
       <Posts posts={posts} />
     </>
