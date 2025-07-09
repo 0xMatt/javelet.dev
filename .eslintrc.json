@@ -3,7 +3,7 @@
     "unused-imports"
   ],
   "rules": {
-    "no-unused-vars": "off", // or "warn" if you want warnings for unused vars
+    "no-unused-vars": "error", // or "warn" if you want warnings for unused vars
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

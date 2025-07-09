@@ -1,6 +1,5 @@
 import type { NextConfig } from 'next';
 import createMDX from '@next/mdx';
-import NextBundleAnalyzer from '@next/bundle-analyzer';
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
@@ -8,14 +7,12 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 
-const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 // Merge MDX config with Next.js config
 
 const nextConfig: NextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  turbopack: {
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+  },
   images: {
     remotePatterns: [
       new URL('https://placehold.co/*'),
@@ -31,4 +28,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withMDX(nextConfig);
