@@ -26,24 +26,21 @@ jobs:
           node-version: 20.x
 
       - name: Install dependencies
-        run: npm ci
-        working-directory: .
+        run: npm ci --force
 
       - name: Run tests
         run: npx jest --coverage --coverageDirectory=.qodana/code-coverage
-        working-directory: .
 
       - name: Archive coverage data # Archive data for use by Qodana
         uses: actions/upload-artifact@v4
         with:
           name: jest-coverage-data
-          path: JS/jest/.qodana/code-coverage
+          path: .qodana/code-coverage
 
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1
         with:
           pr-mode: false
-          args: "-i,JS/jest,--linter,jetbrains/qodana-js:2025.1"
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1717077591 }}
           QODANA_ENDPOINT: 'https://qodana.cloud'
