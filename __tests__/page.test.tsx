@@ -4,11 +4,12 @@ import Page from '../src/app/(home)/page';
 import 'jest-canvas-mock';
 
 describe('Page', () => {
-  it('renders a heading', () => {
-    render(<Page />);
+  it('renders a heading', async () => {
+    const jsx = await Page();
+    render(jsx);
 
-    const heading = screen.getByText(/currently coding/i);
+    const text = screen.getByText(/currently coding/i);
 
-    expect(heading).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
   });
 });
