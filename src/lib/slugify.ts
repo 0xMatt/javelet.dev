@@ -15,7 +15,11 @@ export const slugify = (string: string) => {
 export const unslugify = (slug: string, capitalize?: 'first' | 'all') => {
   let string = slug.replace(/-/g, ' ');
   if (capitalize === 'all') {
-    string = string.replace(/-/g, '-');
+    string = string
+      .replace(/-/g, '-')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   } else if (capitalize === 'first') {
     string = string.replace(/^./, (char) => char.toUpperCase());
   }
