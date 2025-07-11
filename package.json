@@ -9,7 +9,8 @@
     "lint": "next lint",
     "studio": "prisma studio",
     "preinstall": "prisma generate --no-engine",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -89,6 +90,7 @@
     "babel-jest": "^30.0.2",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-unused-imports": "^4.1.4",
     "jest": "^30.0.3",
     "jest-canvas-mock": "^2.5.2",
