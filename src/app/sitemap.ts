@@ -34,12 +34,22 @@ posts = data.map((post) => {
 });
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return MENU_ITEMS.map((item) => {
-    return {
-      url: process.env.APP_URL + item.url,
-      lastModified: new Date(),
-      changeFrequency: item.changeFrequency,
-      priority: item.priority,
-    };
-  }).concat(posts);
+  const flattenedMenu = MENU_ITEMS.flatMap((parent) => {
+    if (parent.items) {
+      return parent.items.map((item) => ({
+        ...item,
+      }));
+    }
+    return [parent];
+  });
+  return flattenedMenu
+    .map((item) => {
+      return {
+        url: process.env.APP_URL + item.url,
+        lastModified: new Date(),
+        changeFrequency: item.changeFrequency,
+        priority: item.priority,
+      };
+    })
+    .concat(posts);
 }
