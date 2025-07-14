@@ -52,6 +52,7 @@ export function Navigation() {
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <Link href={subItem.url}>
+                              <subItem.icon />
                               <span>{subItem.title}</span>
                             </Link>
                           </SidebarMenuSubButton>

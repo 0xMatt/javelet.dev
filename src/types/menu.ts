@@ -15,8 +15,5 @@ export type MenuItem = {
     | 'yearly'
     | 'never'
     | undefined;
-  items?: {
-    title: string;
-    url: string;
-  }[];
+  items?: MenuItem[];
 };

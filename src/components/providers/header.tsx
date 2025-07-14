@@ -7,7 +7,7 @@ import { HeaderSiderbar } from '@/components/layout/headers/sidebar';
 
 export default function Header({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  if (pathname.includes('blog')) {
+  if (pathname.includes('blog') || pathname.includes('browser-quest')) {
     return <HeaderTop>{children}</HeaderTop>;
   }
   if (pathname.includes('auth')) {
